@@ -3,45 +3,44 @@
 
 <mapper namespace="io.renren.modules.sys.dao.SysLogDao">
 
-	<select id="queryObject" resultType="io.renren.modules.sys.entity.SysLogEntity">
-		select * from sys_log where id = #{value}
+    <select id="queryObject" resultType="io.renren.modules.sys.entity.SysLogEntity">
+		select * from sys_log where uid = #{uid}
 	</select>
 
-	<select id="queryList" resultType="io.renren.modules.sys.entity.SysLogEntity">
-		select * from sys_log 
-		<where>
-			<if test="key != null and key.trim() != ''">
-				`username` like concat('%',#{key},'%') or `operation` like concat('%',#{key},'%')
-			</if>
-		</where>
-		order by id desc 
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from sys_log 
-		<where>
-			<if test="key != null and key.trim() != ''">
-				`username` like concat('%',#{key},'%') or `operation` like concat('%',#{key},'%')
-			</if>
-		</where>
-	</select>
-	 
-	<insert id="save" parameterType="io.renren.modules.sys.entity.SysLogEntity" useGeneratedKeys="true" keyProperty="id">
+    <select id="queryList" resultType="io.renren.modules.sys.entity.SysLogEntity">
+        select * from sys_log
+        <where>
+            <if test="key != null and key.trim() != ''">
+                username like concat('%', #{key}, '%') or operation like concat('%', #{key}, '%')
+            </if>
+        </where>
+        order by create_date desc
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select count(*) from sys_log
+        <where>
+            <if test="key != null and key.trim() != ''">
+                username like concat('%', #{key}, '%') or operation like concat('%', #{key}, '%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="io.renren.modules.sys.entity.SysLogEntity">
 		insert into sys_log
 		(
-			`username`, 
-			`operation`, 
-			`method`, 
-			`params`,
-			`time`,
-			`ip`,
-			`create_date`
+		    uid,
+			username, 
+			operation, 
+			method, 
+			params,
+			time,
+			ip,
+			create_date
 		)
 		values
 		(
+			#{uid},
 			#{username},
 			#{operation},
 			#{method},
@@ -51,28 +50,28 @@
 			#{createDate}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="io.renren.modules.sys.entity.SysLogEntity">
-		update sys_log 
-		<set>
-			<if test="username != null">`username` = #{username}, </if>
-			<if test="operation != null">`operation` = #{operation}, </if>
-			<if test="method != null">`method` = #{method}, </if>
-			<if test="params != null">`params` = #{params}, </if>
-			<if test="ip != null">`ip` = #{ip} </if>
-		</set>
-		where id = #{id}
-	</update>
-	
-	<delete id="delete">
-		delete from sys_log where id = #{value}
+
+    <update id="update" parameterType="io.renren.modules.sys.entity.SysLogEntity">
+        update sys_log
+        <set>
+            <if test="username != null">username = #{username},</if>
+            <if test="operation != null">operation = #{operation},</if>
+            <if test="method != null">method = #{method},</if>
+            <if test="params != null">params = #{params},</if>
+            <if test="ip != null">ip = #{ip}</if>
+        </set>
+        where uid = #{uid}
+    </update>
+
+    <delete id="delete">
+		delete from sys_log where uid = #{uid}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from sys_log where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from sys_log where uid in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

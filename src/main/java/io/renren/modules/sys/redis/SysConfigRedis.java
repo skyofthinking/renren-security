@@ -23,7 +23,7 @@ public class SysConfigRedis {
         if(config == null){
             return ;
         }
-        String key = RedisKeys.getSysConfigKey(config.getKey());
+        String key = RedisKeys.getSysConfigKey(config.getKeyword());
         redisUtils.set(key, config);
     }
 

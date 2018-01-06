@@ -8,8 +8,10 @@ package io.renren.common.utils;
  * @date 2016年11月15日 下午1:23:52
  */
 public class Constant {
-	/** 超级管理员ID */
-	public static final int SUPER_ADMIN = 1;
+    /**
+     * 超级管理员ID
+     */
+    public static final int SUPER_ADMIN = 1;
 
 	/**
 	 * 菜单类型
