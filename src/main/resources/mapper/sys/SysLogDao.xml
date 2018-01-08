@@ -4,7 +4,7 @@
 <mapper namespace="io.renren.modules.sys.dao.SysLogDao">
 
     <select id="queryObject" resultType="io.renren.modules.sys.entity.SysLogEntity">
-		select * from sys_log where uid = #{uid}
+		select * from sys_log where uid = #{value}
 	</select>
 
     <select id="queryList" resultType="io.renren.modules.sys.entity.SysLogEntity">

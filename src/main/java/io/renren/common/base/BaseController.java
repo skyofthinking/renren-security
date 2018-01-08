@@ -16,11 +16,11 @@ public abstract class BaseController {
         return (SysUserEntity) SecurityUtils.getSubject().getPrincipal();
     }
 
-    protected Long getUserId() {
-        return getUser().getUserId();
+    protected String getUserId() {
+        return getUser().getUid();
     }
 
-    protected Long getDeptId() {
+    protected String getDeptId() {
         return getUser().getDeptId();
     }
 }

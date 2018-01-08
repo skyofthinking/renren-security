@@ -38,7 +38,6 @@ $(function () {
 
 layui.use('table', function(){
     var table = layui.table;
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 
     table.render({
         elem: '#test'

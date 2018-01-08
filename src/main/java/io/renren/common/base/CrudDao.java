@@ -28,7 +28,7 @@ public interface CrudDao<T> extends BaseDao {
 
     public List<T> queryList(Map<String, Object> map);
 
-    public  List<T> queryList(Object id);
+    public List<T> queryList(Object id);
 
     public int queryTotal(Map<String, Object> map);
 

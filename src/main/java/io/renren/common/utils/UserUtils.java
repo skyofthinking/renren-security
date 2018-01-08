@@ -31,4 +31,7 @@ public class UserUtils {
         return new SysUserEntity();
     }
 
+    public static boolean isAdmin(String id) {
+        return id != null && Constant.SUPER_ADMIN.equals(id);
+    }
 }

@@ -1,6 +1,5 @@
 package io.renren.modules.sys.entity;
 
-
 import org.hibernate.validator.constraints.NotBlank;
 
 /**

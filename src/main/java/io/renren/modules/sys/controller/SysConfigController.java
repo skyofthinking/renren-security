@@ -1,6 +1,5 @@
 package io.renren.modules.sys.controller;
 
-
 import com.github.pagehelper.PageInfo;
 import io.renren.common.annotation.SysLog;
 import io.renren.common.base.BaseController;
@@ -47,7 +46,6 @@ public class SysConfigController extends BaseController {
 
         return R.ok().put("page", pageUtils);
     }
-
 
     /**
      * 配置信息
