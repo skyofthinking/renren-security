@@ -1,6 +1,5 @@
 package io.renren.modules.sys.entity;
 
-
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
@@ -15,13 +14,12 @@ import java.util.List;
  * @email sunlightcs@gmail.com
  * @date 2016年9月18日 上午9:27:38
  */
-public class SysRoleEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+public class SysRoleEntity extends DataEntity<SysRoleEntity> {
+
 	/**
 	 * 角色ID
 	 */
-	private Long roleId;
+	private String roleId;
 
 	/**
 	 * 角色名称
@@ -38,16 +36,16 @@ public class SysRoleEntity implements Serializable {
 	 * 部门ID
 	 */
 	@NotNull(message="部门不能为空")
-	private Long deptId;
+	private String deptId;
 
 	/**
 	 * 部门名称
 	 */
 	private String deptName;
 	
-	private List<Long> menuIdList;
+	private List<String> menuIdList;
 
-	private List<Long> deptIdList;
+	private List<String> deptIdList;
 	
 	/**
 	 * 创建时间
@@ -58,7 +56,7 @@ public class SysRoleEntity implements Serializable {
 	 * 设置：
 	 * @param roleId 
 	 */
-	public void setRoleId(Long roleId) {
+	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
 
@@ -66,7 +64,7 @@ public class SysRoleEntity implements Serializable {
 	 * 获取：
 	 * @return Long
 	 */
-	public Long getRoleId() {
+	public String getRoleId() {
 		return roleId;
 	}
 	
@@ -110,19 +108,19 @@ public class SysRoleEntity implements Serializable {
 		this.createTime = createTime;
 	}
 
-	public List<Long> getMenuIdList() {
+	public List<String> getMenuIdList() {
 		return menuIdList;
 	}
 
-	public void setMenuIdList(List<Long> menuIdList) {
+	public void setMenuIdList(List<String> menuIdList) {
 		this.menuIdList = menuIdList;
 	}
 
-	public Long getDeptId() {
+	public String getDeptId() {
 		return deptId;
 	}
 
-	public void setDeptId(Long deptId) {
+	public void setDeptId(String deptId) {
 		this.deptId = deptId;
 	}
 
@@ -134,11 +132,11 @@ public class SysRoleEntity implements Serializable {
 		this.deptName = deptName;
 	}
 
-	public List<Long> getDeptIdList() {
+	public List<String> getDeptIdList() {
 		return deptIdList;
 	}
 
-	public void setDeptIdList(List<Long> deptIdList) {
+	public void setDeptIdList(List<String> deptIdList) {
 		this.deptIdList = deptIdList;
 	}
 }

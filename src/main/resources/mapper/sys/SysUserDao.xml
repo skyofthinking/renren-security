@@ -10,7 +10,7 @@
 		select u.*, (select d.name from sys_dept d where d.dept_id = u.dept_id) deptName from sys_user u
 		<where>
 			<if test="username != null and username.trim() != ''">
-				and u.`username` like concat('%',#{username},'%')
+				and u.username like concat('%',#{username},'%')
 			</if>
 
 			<!--  数据过滤  -->
@@ -33,7 +33,7 @@
 		select count(*) from sys_user u
 		<where>
 			<if test="username != null and username.trim() != ''">
-				and u.`username` like concat('%',#{username},'%')
+				and u.username like concat('%',#{username},'%')
 			</if>
 
 			<!--  数据过滤  -->
@@ -60,18 +60,18 @@
 		select * from sys_user where username = #{username}
 	</select>
 	
-	<insert id="save" parameterType="io.renren.modules.sys.entity.SysUserEntity" useGeneratedKeys="true" keyProperty="userId">
+	<insert id="save" parameterType="io.renren.modules.sys.entity.SysUserEntity">
 		insert into sys_user
 		(
-			`user_id`, 
-			`username`, 
-			`password`,
-			`salt`,
-			`email`, 
-			`mobile`, 
-			`status`,
-			`dept_id`,
-			`create_time`
+			user_id, 
+			username, 
+			password,
+			salt,
+			email, 
+			mobile, 
+			status,
+			dept_id,
+			create_time
 		)
 		values
 		(
@@ -90,18 +90,18 @@
 	<update id="update" parameterType="io.renren.modules.sys.entity.SysUserEntity">
 		update sys_user 
 		<set> 
-			<if test="username != null">`username` = #{username}, </if>
-			<if test="password != null">`password` = #{password}, </if>
-			<if test="email != null">`email` = #{email}, </if>
-			<if test="mobile != null">`mobile` = #{mobile}, </if>
-			<if test="status != null">`status` = #{status}, </if>
-			<if test="deptId != null">`dept_id` = #{deptId}, </if>
+			<if test="username != null">username = #{username}, </if>
+			<if test="password != null">password = #{password}, </if>
+			<if test="email != null">email = #{email}, </if>
+			<if test="mobile != null">mobile = #{mobile}, </if>
+			<if test="status != null">status = #{status}, </if>
+			<if test="deptId != null">dept_id = #{deptId}, </if>
 		</set>
 		where user_id = #{userId}
 	</update>
 	
 	<update id="updatePassword" parameterType="map">
-		update sys_user set `password` = #{newPassword} 
+		update sys_user set password = #{newPassword} 
 			where user_id = #{userId} and password = #{password}
 	</update>
 	

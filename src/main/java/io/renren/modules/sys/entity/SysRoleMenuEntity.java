@@ -10,42 +10,22 @@ import java.io.Serializable;
  * @email sunlightcs@gmail.com
  * @date 2016年9月18日 上午9:28:13
  */
-public class SysRoleMenuEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	private Long id;
-
+public class SysRoleMenuEntity extends DataEntity<SysRoleEntity> {
 	/**
 	 * 角色ID
 	 */
-	private Long roleId;
+	private String roleId;
 
 	/**
 	 * 菜单ID
 	 */
-	private Long menuId;
-
-	/**
-	 * 设置：
-	 * @param id 
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * 获取：
-	 * @return Long
-	 */
-	public Long getId() {
-		return id;
-	}
+	private String menuId;
 	
 	/**
 	 * 设置：角色ID
 	 * @param roleId 角色ID
 	 */
-	public void setRoleId(Long roleId) {
+	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
 
@@ -53,7 +33,7 @@ public class SysRoleMenuEntity implements Serializable {
 	 * 获取：角色ID
 	 * @return Long
 	 */
-	public Long getRoleId() {
+	public String getRoleId() {
 		return roleId;
 	}
 	
@@ -61,7 +41,7 @@ public class SysRoleMenuEntity implements Serializable {
 	 * 设置：菜单ID
 	 * @param menuId 菜单ID
 	 */
-	public void setMenuId(Long menuId) {
+	public void setMenuId(String menuId) {
 		this.menuId = menuId;
 	}
 
@@ -69,7 +49,7 @@ public class SysRoleMenuEntity implements Serializable {
 	 * 获取：菜单ID
 	 * @return Long
 	 */
-	public Long getMenuId() {
+	public String getMenuId() {
 		return menuId;
 	}
 	

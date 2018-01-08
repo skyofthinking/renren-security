@@ -1,5 +1,6 @@
 package io.renren.modules.sys.dao;
 
+import io.renren.common.base.CrudDao;
 import io.renren.modules.sys.entity.SysRoleEntity;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,7 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2016年9月18日 上午9:33:33
  */
 @Mapper
-public interface SysRoleDao extends BaseDao<SysRoleEntity> {
-	
+public interface SysRoleDao extends CrudDao<SysRoleEntity> {
 
 }

@@ -1,5 +1,7 @@
 package io.renren.modules.sys.dao;
 
+import io.renren.common.base.CrudDao;
+import io.renren.modules.sys.entity.SysConfigEntity;
 import io.renren.modules.sys.entity.SysDeptEntity;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,11 +15,11 @@ import java.util.List;
  * @date 2017-06-20 15:23:47
  */
 @Mapper
-public interface SysDeptDao extends BaseDao<SysDeptEntity> {
+public interface SysDeptDao extends CrudDao<SysDeptEntity> {
 
     /**
      * 查询子部门ID列表
      * @param parentId  上级部门ID
      */
-    List<Long> queryDetpIdList(Long parentId);
+    List<String> queryDetpIdList(String parentId);
 }

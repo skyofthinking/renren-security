@@ -10,42 +10,22 @@ import java.io.Serializable;
  * @email sunlightcs@gmail.com
  * @date 2017年6月21日 23:28:13
  */
-public class SysRoleDeptEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	private Long id;
-
+public class SysRoleDeptEntity extends DataEntity<SysRoleDeptEntity> {
 	/**
 	 * 角色ID
 	 */
-	private Long roleId;
+	private String roleId;
 
 	/**
 	 * 部门ID
 	 */
-	private Long deptId;
+	private String deptId;
 
-	/**
-	 * 设置：
-	 * @param id 
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
-	 * 获取：
-	 * @return Long
-	 */
-	public Long getId() {
-		return id;
-	}
-	
 	/**
 	 * 设置：角色ID
 	 * @param roleId 角色ID
 	 */
-	public void setRoleId(Long roleId) {
+	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
 
@@ -53,7 +33,7 @@ public class SysRoleDeptEntity implements Serializable {
 	 * 获取：角色ID
 	 * @return Long
 	 */
-	public Long getRoleId() {
+	public String getRoleId() {
 		return roleId;
 	}
 	
@@ -61,7 +41,7 @@ public class SysRoleDeptEntity implements Serializable {
 	 * 设置：部门ID
 	 * @param deptId 部门ID
 	 */
-	public void setDeptId(Long deptId) {
+	public void setDeptId(String deptId) {
 		this.deptId = deptId;
 	}
 
@@ -69,7 +49,7 @@ public class SysRoleDeptEntity implements Serializable {
 	 * 获取：部门ID
 	 * @return Long
 	 */
-	public Long getDeptId() {
+	public String getDeptId() {
 		return deptId;
 	}
 	
