@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import io.renren.common.base.BaseController;
 import io.renren.common.utils.R;
 import io.renren.modules.sys.shiro.ShiroUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -34,7 +35,7 @@ import com.google.code.kaptcha.Producer;
  * @date 2016年11月10日 下午1:15:31
  */
 @Controller
-public class SysLoginController {
+public class SysLoginController extends BaseController {
 	@Autowired
 	private Producer producer;
 	

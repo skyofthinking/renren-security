@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @email sunlightcs@gmail.com
  * @date 2016年9月18日 上午9:28:13
  */
-public class SysRoleMenuEntity extends DataEntity<SysRoleEntity> {
+public class SysRoleMenuEntity extends DataEntity<SysRoleMenuEntity> {
 	/**
 	 * 角色ID
 	 */

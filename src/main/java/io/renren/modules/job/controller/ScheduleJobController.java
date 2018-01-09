@@ -1,6 +1,7 @@
 package io.renren.modules.job.controller;
 
 import io.renren.common.annotation.SysLog;
+import io.renren.common.base.BaseController;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.Query;
 import io.renren.common.utils.R;
@@ -23,7 +24,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/sys/schedule")
-public class ScheduleJobController {
+public class ScheduleJobController extends BaseController {
     @Autowired
     private ScheduleJobService scheduleJobService;
 

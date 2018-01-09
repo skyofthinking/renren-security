@@ -24,7 +24,7 @@
 		delete from sys_role_menu where role_id = #{value}
 	</delete>
 	
-	<select id="queryMenuIdList" resultType="long">
+	<select id="queryMenuIdList" resultType="String">
 		select menu_id from sys_role_menu where role_id = #{value}
 	</select>
 

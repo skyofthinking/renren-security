@@ -2,6 +2,7 @@ package io.renren.modules.sys.controller;
 
 
 import io.renren.common.annotation.SysLog;
+import io.renren.common.base.BaseController;
 import io.renren.modules.sys.shiro.ShiroUtils;
 import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.common.utils.PageUtils;
@@ -30,7 +31,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/sys/user")
-public class SysUserController extends AbstractController {
+public class SysUserController extends BaseController {
 	@Autowired
 	private SysUserService sysUserService;
 	@Autowired
@@ -87,11 +88,11 @@ public class SysUserController extends AbstractController {
 	 */
 	@RequestMapping("/info/{userId}")
 	@RequiresPermissions("sys:user:info")
-	public R info(@PathVariable("userId") Long userId){
+	public R info(@PathVariable("userId") String userId){
 		SysUserEntity user = sysUserService.queryObject(userId);
 		
 		//获取用户所属的角色列表
-		List<Long> roleIdList = sysUserRoleService.queryRoleIdList(userId);
+		List<String> roleIdList = sysUserRoleService.queryRoleIdList(userId);
 		user.setRoleIdList(roleIdList);
 		
 		return R.ok().put("user", user);

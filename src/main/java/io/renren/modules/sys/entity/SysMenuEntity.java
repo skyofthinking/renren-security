@@ -58,6 +58,11 @@ public class SysMenuEntity extends DataEntity<SysMenuEntity> {
     private Integer orderNum;
 
     /**
+     * 是否为系统菜单 系统菜单不允许删除 1是 0否
+     */
+    private String sysMenu;
+
+    /**
      * ztree属性
      */
     private Boolean open;
@@ -176,6 +181,14 @@ public class SysMenuEntity extends DataEntity<SysMenuEntity> {
      */
     public Integer getOrderNum() {
         return orderNum;
+    }
+
+    public String getSysMenu() {
+        return sysMenu;
+    }
+
+    public void setSysMenu(String sysMenu) {
+        this.sysMenu = sysMenu;
     }
 
     public List<?> getList() {

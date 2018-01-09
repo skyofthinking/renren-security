@@ -1,5 +1,6 @@
 package io.renren.modules.sys.controller;
 
+import io.renren.common.base.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2016年11月24日 下午11:05:27
  */
 @Controller
-public class SysPageController {
+public class SysPageController extends BaseController {
 
 	@RequestMapping("modules/{module}/{url}.html")
 	public String module(@PathVariable("module") String module, @PathVariable("url") String url){

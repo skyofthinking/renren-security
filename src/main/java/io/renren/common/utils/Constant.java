@@ -15,6 +15,8 @@ public class Constant {
 
     public static final String IS_SYS_MENU = "1";
 
+    public static final String ROOT_ID = "0";
+
     /**
      * 菜单类型
      *

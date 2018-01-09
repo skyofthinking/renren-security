@@ -7,6 +7,7 @@ import io.renren.modules.sys.dao.SysConfigDao;
 import io.renren.modules.sys.dao.SysDeptDao;
 import io.renren.modules.sys.entity.SysConfigEntity;
 import io.renren.modules.sys.entity.SysDeptEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.Map;
  * @email sunlightcs@gmail.com
  * @date 2017-06-20 15:23:47
  */
+@Service
 public class SysDeptService extends CrudService<SysDeptDao, SysDeptEntity> {
 
     @DataFilter(tableAlias = "d", user = false)

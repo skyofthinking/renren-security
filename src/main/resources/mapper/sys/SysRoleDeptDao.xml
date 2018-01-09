@@ -24,7 +24,7 @@
 		delete from sys_role_dept where role_id = #{value}
 	</delete>
 	
-	<select id="queryDeptIdList" resultType="long">
+	<select id="queryDeptIdList" resultType="String">
 		select dept_id from sys_role_dept where role_id = #{value}
 	</select>
 

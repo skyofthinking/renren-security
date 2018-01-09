@@ -17,7 +17,7 @@ public abstract class BaseController {
     }
 
     protected String getUserId() {
-        return getUser().getUid();
+        return getUser().getUserId();
     }
 
     protected String getDeptId() {
