@@ -90,6 +90,7 @@ CREATE TABLE `qrtz_cron_triggers` (
 
 LOCK TABLES `qrtz_cron_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_cron_triggers` DISABLE KEYS */;
+INSERT INTO `qrtz_cron_triggers` VALUES ('RenrenScheduler','TASK_1','DEFAULT','0 0/30 * * * ?','Asia/Shanghai'),('RenrenScheduler','TASK_2','DEFAULT','0 0/30 * * * ?','Asia/Shanghai');
 /*!40000 ALTER TABLE `qrtz_cron_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,6 +164,7 @@ CREATE TABLE `qrtz_job_details` (
 
 LOCK TABLES `qrtz_job_details` WRITE;
 /*!40000 ALTER TABLE `qrtz_job_details` DISABLE KEYS */;
+INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler','TASK_1','DEFAULT',NULL,'io.renren.modules.job.utils.ScheduleJob','0','0','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xpt\0testTasksr\0java.util.Datehj�KYt\0\0xpw\0\0X���0xt\00 0/30 * * * ?sr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0testt\0renrent\0有参数测试sr\0java.lang.Integer⠤���8\0I\0valuexq\0~\0\0\0\0\0x\0'),('RenrenScheduler','TASK_2','DEFAULT',NULL,'io.renren.modules.job.utils.ScheduleJob','0','0','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xpt\0testTasksr\0java.util.Datehj�KYt\0\0xpw\0\0X�w�`xt\00 0/30 * * * ?sr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0test2pt\0无参数测试sr\0java.lang.Integer⠤���8\0I\0valuexq\0~\0\0\0\0x\0');
 /*!40000 ALTER TABLE `qrtz_job_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,6 +188,7 @@ CREATE TABLE `qrtz_locks` (
 
 LOCK TABLES `qrtz_locks` WRITE;
 /*!40000 ALTER TABLE `qrtz_locks` DISABLE KEYS */;
+INSERT INTO `qrtz_locks` VALUES ('RenrenScheduler','STATE_ACCESS'),('RenrenScheduler','TRIGGER_ACCESS');
 /*!40000 ALTER TABLE `qrtz_locks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,6 +237,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
+INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler','WIN-017122716491515462511010',1515464739542,15000);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,6 +352,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
+INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler','TASK_1','DEFAULT','TASK_1','DEFAULT',NULL,1515465000000,1515463200000,5,'WAITING','CRON',1515462304000,0,NULL,2,'��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xpt\0testTasksr\0java.util.Datehj�KYt\0\0xpw\0\0X���0xt\00 0/30 * * * ?sr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0testt\0renrent\0有参数测试sr\0java.lang.Integer⠤���8\0I\0valuexq\0~\0\0\0\0\0x\0'),('RenrenScheduler','TASK_2','DEFAULT','TASK_2','DEFAULT',NULL,1515463200000,-1,5,'PAUSED','CRON',1515462304000,0,NULL,2,'��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xpt\0testTasksr\0java.util.Datehj�KYt\0\0xpw\0\0X�w�`xt\00 0/30 * * * ?sr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0test2pt\0无参数测试sr\0java.lang.Integer⠤���8\0I\0valuexq\0~\0\0\0\0x\0');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -400,7 +405,7 @@ CREATE TABLE `schedule_job_log` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`log_id`),
   KEY `job_id` (`job_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -409,6 +414,7 @@ CREATE TABLE `schedule_job_log` (
 
 LOCK TABLES `schedule_job_log` WRITE;
 /*!40000 ALTER TABLE `schedule_job_log` DISABLE KEYS */;
+INSERT INTO `schedule_job_log` VALUES (1,1,'testTask','test','renren',0,NULL,1009,'2018-01-09 10:00:00');
 /*!40000 ALTER TABLE `schedule_job_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -517,6 +523,7 @@ CREATE TABLE `sys_menu` (
   `type` int(11) DEFAULT NULL COMMENT '类型   0：目录   1：菜单   2：按钮',
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
+  `sys_menu` varchar(10) DEFAULT '0' COMMENT '是否为系统菜单 系统菜单不允许删除 1是 0否',
   PRIMARY KEY (`menu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -527,7 +534,7 @@ CREATE TABLE `sys_menu` (
 
 LOCK TABLES `sys_menu` WRITE;
 /*!40000 ALTER TABLE `sys_menu` DISABLE KEYS */;
-INSERT INTO `sys_menu` VALUES ('1','0','系统管理',NULL,NULL,0,'fa fa-cog',0),('10','6','删除',NULL,'sys:schedule:delete',2,NULL,0),('11','6','暂停',NULL,'sys:schedule:pause',2,NULL,0),('12','6','恢复',NULL,'sys:schedule:resume',2,NULL,0),('13','6','立即执行',NULL,'sys:schedule:run',2,NULL,0),('14','6','日志列表',NULL,'sys:schedule:log',2,NULL,0),('15','2','查看',NULL,'sys:user:list,sys:user:info',2,NULL,0),('16','2','新增',NULL,'sys:user:save,sys:role:select',2,NULL,0),('17','2','修改',NULL,'sys:user:update,sys:role:select',2,NULL,0),('18','2','删除',NULL,'sys:user:delete',2,NULL,0),('19','3','查看',NULL,'sys:role:list,sys:role:info',2,NULL,0),('2','1','管理员管理','modules/sys/user.html',NULL,1,'fa fa-user',1),('20','3','新增',NULL,'sys:role:save,sys:menu:perms',2,NULL,0),('21','3','修改',NULL,'sys:role:update,sys:menu:perms',2,NULL,0),('22','3','删除',NULL,'sys:role:delete',2,NULL,0),('23','4','查看',NULL,'sys:menu:list,sys:menu:info',2,NULL,0),('24','4','新增',NULL,'sys:menu:save,sys:menu:select',2,NULL,0),('25','4','修改',NULL,'sys:menu:update,sys:menu:select',2,NULL,0),('26','4','删除',NULL,'sys:menu:delete',2,NULL,0),('27','1','参数管理','modules/sys/config.html','sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete',1,'fa fa-sun-o',6),('28','1','代码生成器','modules/gen/generator.html','sys:generator:list,sys:generator:code',1,'fa fa-rocket',8),('29','1','系统日志','modules/sys/log.html','sys:log:list',1,'fa fa-file-text-o',7),('3','1','角色管理','modules/sys/role.html',NULL,1,'fa fa-user-secret',2),('30','1','文件上传','modules/oss/oss.html','sys:oss:all',1,'fa fa-file-image-o',6),('31','1','部门管理','modules/sys/dept.html',NULL,1,'fa fa-file-code-o',1),('32','31','查看',NULL,'sys:dept:list,sys:dept:info',2,NULL,0),('33','31','新增',NULL,'sys:dept:save,sys:dept:select',2,NULL,0),('34','31','修改',NULL,'sys:dept:update,sys:dept:select',2,NULL,0),('35','31','删除',NULL,'sys:dept:delete',2,NULL,0),('4','1','菜单管理','modules/sys/menu.html',NULL,1,'fa fa-th-list',3),('5','1','SQL监控','druid/sql.html',NULL,1,'fa fa-bug',4),('6','1','定时任务','modules/job/schedule.html',NULL,1,'fa fa-tasks',5),('7','6','查看',NULL,'sys:schedule:list,sys:schedule:info',2,NULL,0),('8','6','新增',NULL,'sys:schedule:save',2,NULL,0),('9','6','修改',NULL,'sys:schedule:update',2,NULL,0);
+INSERT INTO `sys_menu` VALUES ('1','0','系统管理',NULL,NULL,0,'fa fa-cog',0,'1'),('10','6','删除',NULL,'sys:schedule:delete',2,NULL,0,'1'),('11','6','暂停',NULL,'sys:schedule:pause',2,NULL,0,'1'),('12','6','恢复',NULL,'sys:schedule:resume',2,NULL,0,'1'),('13','6','立即执行',NULL,'sys:schedule:run',2,NULL,0,'1'),('14','6','日志列表',NULL,'sys:schedule:log',2,NULL,0,'1'),('15','2','查看',NULL,'sys:user:list,sys:user:info',2,NULL,0,'1'),('16','2','新增',NULL,'sys:user:save,sys:role:select',2,NULL,0,'1'),('17','2','修改',NULL,'sys:user:update,sys:role:select',2,NULL,0,'1'),('18','2','删除',NULL,'sys:user:delete',2,NULL,0,'1'),('19','3','查看',NULL,'sys:role:list,sys:role:info',2,NULL,0,'1'),('2','1','管理员管理','modules/sys/user.html',NULL,1,'fa fa-user',1,'1'),('20','3','新增',NULL,'sys:role:save,sys:menu:perms',2,NULL,0,'1'),('21','3','修改',NULL,'sys:role:update,sys:menu:perms',2,NULL,0,'1'),('22','3','删除',NULL,'sys:role:delete',2,NULL,0,'1'),('23','4','查看',NULL,'sys:menu:list,sys:menu:info',2,NULL,0,'1'),('24','4','新增',NULL,'sys:menu:save,sys:menu:select',2,NULL,0,'1'),('25','4','修改',NULL,'sys:menu:update,sys:menu:select',2,NULL,0,'1'),('26','4','删除',NULL,'sys:menu:delete',2,NULL,0,'1'),('27','1','参数管理','modules/sys/config.html','sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete',1,'fa fa-sun-o',6,'1'),('28','1','代码生成器','modules/gen/generator.html','sys:generator:list,sys:generator:code',1,'fa fa-rocket',8,'1'),('29','1','系统日志','modules/sys/log.html','sys:log:list',1,'fa fa-file-text-o',7,'1'),('3','1','角色管理','modules/sys/role.html',NULL,1,'fa fa-user-secret',2,'1'),('30','1','文件上传','modules/oss/oss.html','sys:oss:all',1,'fa fa-file-image-o',6,'1'),('31','1','部门管理','modules/sys/dept.html',NULL,1,'fa fa-file-code-o',1,'1'),('32','31','查看',NULL,'sys:dept:list,sys:dept:info',2,NULL,0,'1'),('33','31','新增',NULL,'sys:dept:save,sys:dept:select',2,NULL,0,'1'),('34','31','修改',NULL,'sys:dept:update,sys:dept:select',2,NULL,0,'1'),('35','31','删除',NULL,'sys:dept:delete',2,NULL,0,'1'),('4','1','菜单管理','modules/sys/menu.html',NULL,1,'fa fa-th-list',3,'1'),('5','1','SQL监控','druid/sql.html',NULL,1,'fa fa-bug',4,'1'),('6','1','定时任务','modules/job/schedule.html',NULL,1,'fa fa-tasks',5,'1'),('7','6','查看',NULL,'sys:schedule:list,sys:schedule:info',2,NULL,0,'1'),('8','6','新增',NULL,'sys:schedule:save',2,NULL,0,'1'),('9','6','修改',NULL,'sys:schedule:update',2,NULL,0,'1');
 /*!40000 ALTER TABLE `sys_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -698,4 +705,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-08 18:06:24
+-- Dump completed on 2018-01-09 17:29:43

@@ -1,27 +1,51 @@
 package io.renren.modules.gen.service;
 
+import io.renren.common.base.CrudService;
+import io.renren.modules.gen.dao.SysGeneratorDao;
+import io.renren.modules.gen.entity.SysGeneratorEntity;
+import io.renren.modules.gen.utils.GenUtils;
+import org.apache.commons.io.IOUtils;
+import org.springframework.stereotype.Service;
+
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipOutputStream;
 
 /**
  * 代码生成器
- * 
+ *
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2016年12月19日 下午3:33:38
  */
-public interface SysGeneratorService {
-	
-	List<Map<String, Object>> queryList(Map<String, Object> map);
-	
-	int queryTotal(Map<String, Object> map);
-	
-	Map<String, String> queryTable(String tableName);
-	
-	List<Map<String, String>> queryColumns(String tableName);
-	
-	/**
-	 * 生成代码
-	 */
-	byte[] generatorCode(String[] tableNames);
+@Service
+public class SysGeneratorService extends CrudService<SysGeneratorDao, SysGeneratorEntity> {
+
+    public Map<String, String> queryTable(String tableName) {
+        return dao.queryTable(tableName);
+    }
+
+    public List<Map<String, String>> queryColumns(String tableName) {
+        return dao.queryColumns(tableName);
+    }
+
+    /**
+     * 生成代码
+     */
+    public byte[] generatorCode(String[] tableNames) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ZipOutputStream zip = new ZipOutputStream(outputStream);
+
+        for (String tableName : tableNames) {
+            //查询表信息
+            Map<String, String> table = queryTable(tableName);
+            //查询列信息
+            List<Map<String, String>> columns = queryColumns(tableName);
+            //生成代码
+            GenUtils.generatorCode(table, columns, zip);
+        }
+        IOUtils.closeQuietly(zip);
+        return outputStream.toByteArray();
+    }
 }

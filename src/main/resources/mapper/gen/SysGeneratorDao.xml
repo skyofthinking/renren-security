@@ -2,32 +2,85 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="io.renren.modules.gen.dao.SysGeneratorDao">
-	<select id="queryList" resultType="map">
-		select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables 
-			where table_schema = (select database()) 
-		<if test="tableName != null and tableName.trim() != ''">
-			and table_name like concat('%', #{tableName}, '%') 
-		</if>
-		order by create_time desc
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
-	<select id="queryTotal" resultType="int">
-		select count(*) from information_schema.tables where table_schema = (select database())
-		<if test="tableName != null and tableName.trim() != ''">
-			and table_name like concat('%', #{tableName}, '%') 
-		</if> 
-	</select> 
-	
-	<select id="queryTable" resultType="map">
-		select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables 
-			where table_schema = (select database()) and table_name = #{tableName}
-	</select> 
-	
-	<select id="queryColumns" resultType="map">
-		select column_name columnName, data_type dataType, column_comment columnComment, column_key columnKey, extra from information_schema.columns
- 			where table_name = #{tableName} and table_schema = (select database()) order by ordinal_position
-	</select>
+
+    <select id="queryList" resultType="map">
+        <if test="dbName == 'oracle'">
+            select lower(t.table_name) as table_name, '' as engine, c.comments as table_comment, d.created as
+            create_time
+            from user_tables t, user_tab_comments c, user_objects d
+            where t.table_name = c.table_name
+            and t.table_name = d.object_name
+            <if test="tableName != null and tableName.trim() != ''">
+                and lower(t.table_name) like '%' || lower(#{tableName}) || '%'
+            </if>
+            order by d.created desc
+        </if>
+        <if test="dbName == 'mysql'">
+            select lower(table_name) table_name, engine, table_comment, create_time from
+            information_schema.tables
+            where table_schema = (select database())
+            <if test="tableName != null and tableName.trim() != ''">
+                and table_name like concat('%', #{tableName}, '%')
+            </if>
+            order by create_time desc
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        <if test="dbName == 'oracle'">
+            select count(*)
+            from user_tables t, user_tab_comments c, user_objects d
+            where t.table_name = c.table_name
+            and t.table_name = d.object_name
+            <if test="tableName != null and tableName.trim() != ''">
+                and lower(t.table_name) like '%' || lower(#{tableName}) || '%'
+            </if>
+            order by d.created desc
+        </if>
+        <if test="dbName == 'mysql'">
+            select count(*) from
+            information_schema.tables
+            where table_schema = (select database())
+            <if test="tableName != null and tableName.trim() != ''">
+                and table_name like concat('%', #{tableName}, '%')
+            </if>
+            order by create_time desc
+        </if>
+    </select>
+
+    <select id="queryTable" resultType="map">
+        <if test="dbName == 'oracle'">
+            select lower(t.table_name) as tableName, '' as engine, c.comments as tableComment, d.created as createTime
+            from user_tables t, user_tab_comments c, user_objects d
+            where lower(t.table_name) = lower(c.table_name)
+            and lower(t.table_name) = lower(d.object_name)
+            and lower(t.table_name) = lower(#{tableName})
+            order by d.created desc
+        </if>
+        <if test="dbName == 'mysql'">
+            select table_name tableName, engine, table_comment tableComment, create_time createTime from
+            information_schema.tables
+            where table_schema = (select database()) and table_name = #{tableName}
+        </if>
+    </select>
+
+    <select id="queryColumns" resultType="map">
+        <if test="dbName == 'oracle'">
+            select lower(t.column_name) as columnName, t.data_type dataType, c.comments as columnComment
+            , (select 'PRI' from user_constraints con, user_cons_columns col where con.constraint_name =
+            col.constraint_name and con.constraint_type = 'P' and col.table_name = t.table_name and col.column_name =
+            c.column_name) columnKey
+            , '' extra
+            from user_tab_columns t, user_col_comments c
+            where lower(t.table_name) = lower(c.table_name)
+            and lower(t.column_name) = lower(c.column_name)
+            and lower(t.table_name) = lower(#{tableName})
+            order by t.column_id
+        </if>
+        <if test="dbName == 'mysql'">
+            select column_name columnName, data_type dataType, column_comment columnComment, column_key columnKey, extra
+            from information_schema.columns
+            where table_name = #{tableName} and table_schema = (select database()) order by ordinal_position
+        </if>
+    </select>
 </mapper>
