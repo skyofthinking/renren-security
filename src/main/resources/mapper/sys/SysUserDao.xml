@@ -24,9 +24,6 @@
 				order by u.user_id desc
 			</otherwise>
 		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
 	</select>
 	
 	<select id="queryTotal" resultType="int">

@@ -23,6 +23,7 @@ import java.util.Properties;
 public class FreemarkerConfig {
     @Autowired
     protected freemarker.template.Configuration configuration;
+
     @Bean
     public FreeMarkerConfigurer freeMarkerConfigurer(ShiroTag shiroTag){
         FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
