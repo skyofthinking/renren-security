@@ -1,5 +1,6 @@
 package io.renren.modules.sys.entity;
 
+import io.renren.common.base.DataEntity;
 import io.renren.common.validator.group.AddGroup;
 import io.renren.common.validator.group.UpdateGroup;
 import org.hibernate.validator.constraints.Email;
@@ -17,6 +18,7 @@ import java.util.List;
  * @date 2016年9月18日 上午9:28:55
  */
 public class SysUserEntity extends DataEntity<SysUserEntity> {
+    private static final long serialVersionUID = 1L;
 
     /**
      * 用户ID

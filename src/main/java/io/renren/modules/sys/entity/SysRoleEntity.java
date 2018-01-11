@@ -1,9 +1,9 @@
 package io.renren.modules.sys.entity;
 
+import io.renren.common.base.DataEntity;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +15,7 @@ import java.util.List;
  * @date 2016年9月18日 上午9:27:38
  */
 public class SysRoleEntity extends DataEntity<SysRoleEntity> {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 角色ID

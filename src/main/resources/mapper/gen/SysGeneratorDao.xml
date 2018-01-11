@@ -3,7 +3,7 @@
 
 <mapper namespace="io.renren.modules.gen.dao.SysGeneratorDao">
 
-    <select id="queryList" resultType="map">
+    <select id="queryList" parameterType="map" resultType="io.renren.modules.gen.entity.SysGeneratorEntity">
         <if test="dbName == 'oracle'">
             select lower(t.table_name) as table_name, '' as engine, c.comments as table_comment, d.created as
             create_time

@@ -1,9 +1,7 @@
 package io.renren.modules.oss.entity;
 
-import io.renren.modules.sys.entity.DataEntity;
-import io.renren.modules.sys.entity.SysConfigEntity;
+import io.renren.common.base.DataEntity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,6 +12,7 @@ import java.util.Date;
  * @date 2017-03-25 12:13:26
  */
 public class SysOssEntity extends DataEntity<SysOssEntity> {
+    private static final long serialVersionUID = 1L;
 
     //URL地址
     private String url;

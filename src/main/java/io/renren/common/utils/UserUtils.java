@@ -23,9 +23,11 @@ public class UserUtils {
      * @return 取不到返回 new User()
      */
     public static SysUserEntity getUser() {
-        SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getPrincipal();
-        if (user != null) {
-            return user;
+        if (SecurityUtils.getSubject() != null) {
+            SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getPrincipal();
+            if (user != null) {
+                return user;
+            }
         }
         // 如果没有登录，则返回实例化空的User对象。
         return new SysUserEntity();

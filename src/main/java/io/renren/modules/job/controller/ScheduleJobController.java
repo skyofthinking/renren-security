@@ -101,7 +101,7 @@ public class ScheduleJobController extends BaseController {
     @SysLog("立即执行任务")
     @RequestMapping("/run")
     @RequiresPermissions("sys:schedule:run")
-    public R run(@RequestBody Long[] jobIds) {
+    public R run(@RequestBody String[] jobIds) {
         scheduleJobService.run(jobIds);
 
         return R.ok();
@@ -113,7 +113,7 @@ public class ScheduleJobController extends BaseController {
     @SysLog("暂停定时任务")
     @RequestMapping("/pause")
     @RequiresPermissions("sys:schedule:pause")
-    public R pause(@RequestBody Long[] jobIds) {
+    public R pause(@RequestBody String[] jobIds) {
         scheduleJobService.pause(jobIds);
 
         return R.ok();
@@ -125,7 +125,7 @@ public class ScheduleJobController extends BaseController {
     @SysLog("恢复定时任务")
     @RequestMapping("/resume")
     @RequiresPermissions("sys:schedule:resume")
-    public R resume(@RequestBody Long[] jobIds) {
+    public R resume(@RequestBody String[] jobIds) {
         scheduleJobService.resume(jobIds);
 
         return R.ok();

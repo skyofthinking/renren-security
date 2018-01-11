@@ -1,6 +1,7 @@
 package io.renren.modules.sys.entity;
 
-import java.io.Serializable;
+import io.renren.common.base.DataEntity;
+
 import java.util.List;
 
 /**
@@ -11,6 +12,8 @@ import java.util.List;
  * @date 2017-06-20 15:23:47
  */
 public class SysDeptEntity extends DataEntity<SysDeptEntity> {
+    private static final long serialVersionUID = 1L;
+
     //部门ID
     private String deptId;
     //上级部门ID，一级部门为0

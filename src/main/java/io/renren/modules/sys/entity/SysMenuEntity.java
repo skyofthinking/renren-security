@@ -1,7 +1,8 @@
 package io.renren.modules.sys.entity;
 
 
-import java.io.Serializable;
+import io.renren.common.base.DataEntity;
+
 import java.util.List;
 
 /**
@@ -12,6 +13,8 @@ import java.util.List;
  * @date 2016年9月18日 上午9:26:39
  */
 public class SysMenuEntity extends DataEntity<SysMenuEntity> {
+    private static final long serialVersionUID = 1L;
+
     /**
      * 菜单ID
      */

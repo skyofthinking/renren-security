@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * 定时任务日志
- * 
+ *
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2016年12月1日 下午10:39:52
@@ -26,32 +26,32 @@ import java.util.Map;
 @RestController
 @RequestMapping("/sys/scheduleLog")
 public class ScheduleJobLogController extends BaseController {
-	@Autowired
-	private ScheduleJobLogService scheduleJobLogService;
-	
-	/**
-	 * 定时任务日志列表
-	 */
-	@RequestMapping("/list")
-	@RequiresPermissions("sys:schedule:log")
-	public R list(@RequestParam Map<String, Object> params){
-		//查询列表数据
-		Query query = new Query(params);
-		List<ScheduleJobLogEntity> jobList = scheduleJobLogService.queryList(query);
-		int total = scheduleJobLogService.queryTotal(query);
-		
-		PageUtils pageUtil = new PageUtils(jobList, total, query.getLimit(), query.getPage());
-		
-		return R.ok().put("page", pageUtil);
-	}
-	
-	/**
-	 * 定时任务日志信息
-	 */
-	@RequestMapping("/info/{logId}")
-	public R info(@PathVariable("logId") Long logId){
-		ScheduleJobLogEntity log = scheduleJobLogService.queryObject(logId);
-		
-		return R.ok().put("log", log);
-	}
+    @Autowired
+    private ScheduleJobLogService scheduleJobLogService;
+
+    /**
+     * 定时任务日志列表
+     */
+    @RequestMapping("/list")
+    @RequiresPermissions("sys:schedule:log")
+    public R list(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+        List<ScheduleJobLogEntity> jobList = scheduleJobLogService.queryList(query);
+        int total = scheduleJobLogService.queryTotal(query);
+
+        PageUtils pageUtil = new PageUtils(jobList, total, query.getLimit(), query.getPage());
+
+        return R.ok().put("page", pageUtil);
+    }
+
+    /**
+     * 定时任务日志信息
+     */
+    @RequestMapping("/info/{logId}")
+    public R info(@PathVariable("logId") String logId) {
+        ScheduleJobLogEntity log = scheduleJobLogService.queryObject(logId);
+
+        return R.ok().put("log", log);
+    }
 }

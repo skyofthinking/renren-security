@@ -1,20 +1,16 @@
-package io.renren.modules.sys.entity;
+package io.renren.common.base;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.renren.common.utils.IdGen;
 import io.renren.common.utils.UserUtils;
-import io.renren.modules.sys.entity.BaseEntity;
 import io.renren.modules.sys.entity.SysUserEntity;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.hibernate.validator.constraints.Length;
 
-import java.io.Serializable;
 import java.util.Date;
 
 public abstract class DataEntity<T> extends BaseEntity<T> {
-
     protected String remarks;    // 备注
     protected SysUserEntity createBy;    // 创建者
     protected Date createDate;    // 创建日期

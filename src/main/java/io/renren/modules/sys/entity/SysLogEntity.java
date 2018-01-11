@@ -1,5 +1,7 @@
 package io.renren.modules.sys.entity;
 
+import io.renren.common.base.DataEntity;
+
 import java.util.Date;
 
 /**
@@ -10,6 +12,8 @@ import java.util.Date;
  * @date 2017-03-08 10:40:56
  */
 public class SysLogEntity extends DataEntity<SysLogEntity> {
+    private static final long serialVersionUID = 1L;
+
     //用户名
     private String username;
     //用户操作

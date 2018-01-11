@@ -1,8 +1,9 @@
 package io.renren.modules.gen.entity;
 
-import io.renren.modules.sys.entity.DataEntity;
+import io.renren.common.base.DataEntity;
 
 public class SysGeneratorEntity extends DataEntity<SysGeneratorEntity> {
+    private static final long serialVersionUID = 1L;
 
     // 表名
     private String tableName;

@@ -128,7 +128,7 @@ public class SysOssController extends BaseController {
      */
     @RequestMapping("/delete")
     @RequiresPermissions("sys:oss:all")
-    public R delete(@RequestBody Long[] ids) {
+    public R delete(@RequestBody String[] ids) {
         sysOssService.deleteBatch(ids);
 
         return R.ok();

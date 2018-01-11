@@ -1,10 +1,10 @@
-package io.renren.modules.sys.entity;
+package io.renren.common.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.renren.common.utils.Global;
+import io.renren.modules.sys.entity.SysUserEntity;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Map;
 

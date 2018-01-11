@@ -1,7 +1,11 @@
 package io.renren.modules.job.service;
 
-
+import io.renren.common.base.CrudService;
+import io.renren.modules.job.dao.ScheduleJobLogDao;
 import io.renren.modules.job.entity.ScheduleJobLogEntity;
+import io.renren.modules.sys.dao.SysConfigDao;
+import io.renren.modules.sys.entity.SysConfigEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -13,26 +17,7 @@ import java.util.Map;
  * @email sunlightcs@gmail.com
  * @date 2016年12月1日 下午10:34:48
  */
-public interface ScheduleJobLogService {
+@Service
+public class ScheduleJobLogService extends CrudService<ScheduleJobLogDao, ScheduleJobLogEntity> {
 
-	/**
-	 * 根据ID，查询定时任务日志
-	 */
-	ScheduleJobLogEntity queryObject(Long jobId);
-	
-	/**
-	 * 查询定时任务日志列表
-	 */
-	List<ScheduleJobLogEntity> queryList(Map<String, Object> map);
-	
-	/**
-	 * 查询总数
-	 */
-	int queryTotal(Map<String, Object> map);
-	
-	/**
-	 * 保存定时任务日志
-	 */
-	void save(ScheduleJobLogEntity log);
-	
 }

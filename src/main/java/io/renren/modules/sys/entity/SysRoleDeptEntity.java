@@ -1,7 +1,7 @@
 package io.renren.modules.sys.entity;
 
 
-import java.io.Serializable;
+import io.renren.common.base.DataEntity;
 
 /**
  * 角色与部门对应关系
@@ -11,6 +11,8 @@ import java.io.Serializable;
  * @date 2017年6月21日 23:28:13
  */
 public class SysRoleDeptEntity extends DataEntity<SysRoleDeptEntity> {
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 角色ID
 	 */

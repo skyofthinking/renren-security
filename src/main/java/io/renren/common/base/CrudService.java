@@ -1,6 +1,5 @@
 package io.renren.common.base;
 
-import io.renren.modules.sys.entity.DataEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +11,7 @@ import java.util.Map;
  * Service基类
  */
 @Transactional
-public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>> extends BaseService {
+public abstract class CrudService<D extends CrudDao<T>, T extends BaseEntity<T>> extends BaseService {
 
     /**
      * 持久层对象

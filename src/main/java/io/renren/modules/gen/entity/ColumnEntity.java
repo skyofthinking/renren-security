@@ -1,7 +1,6 @@
 package io.renren.modules.gen.entity;
 
-import io.renren.modules.sys.entity.DataEntity;
-import io.renren.modules.sys.entity.SysConfigEntity;
+import io.renren.common.base.DataEntity;
 
 /**
  * 列的属性
@@ -11,6 +10,8 @@ import io.renren.modules.sys.entity.SysConfigEntity;
  * @date 2016年12月20日 上午12:01:45
  */
 public class ColumnEntity extends DataEntity<ColumnEntity> {
+    private static final long serialVersionUID = 1L;
+
     //列名
     private String columnName;
     //列名类型
