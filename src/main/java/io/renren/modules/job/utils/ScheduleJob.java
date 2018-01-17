@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-
 /**
  * 定时任务
  *
@@ -32,6 +31,7 @@ public class ScheduleJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+        logger.info("executeInternal " + context.getMergedJobDataMap().get(ScheduleJobEntity.JOB_PARAM_KEY));
         ScheduleJobEntity scheduleJob = (ScheduleJobEntity) context.getMergedJobDataMap().get(ScheduleJobEntity.JOB_PARAM_KEY);
 
         //获取spring bean
