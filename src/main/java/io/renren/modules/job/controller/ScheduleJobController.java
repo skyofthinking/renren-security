@@ -64,7 +64,7 @@ public class ScheduleJobController extends BaseController {
     public R save(@RequestBody ScheduleJobEntity scheduleJob) {
         ValidatorUtils.validateEntity(scheduleJob);
 
-        scheduleJobService.save(scheduleJob);
+        scheduleJobService.insert(scheduleJob);
 
         return R.ok();
     }
@@ -89,7 +89,7 @@ public class ScheduleJobController extends BaseController {
     @SysLog("删除定时任务")
     @RequestMapping("/delete")
     @RequiresPermissions("sys:schedule:delete")
-    public R delete(@RequestBody Long[] jobIds) {
+    public R delete(@RequestBody String[] jobIds) {
         scheduleJobService.deleteBatch(jobIds);
 
         return R.ok();

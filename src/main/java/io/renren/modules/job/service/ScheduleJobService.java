@@ -7,6 +7,8 @@ import io.renren.modules.job.entity.ScheduleJobEntity;
 import io.renren.modules.job.utils.ScheduleUtils;
 import org.quartz.CronTrigger;
 import org.quartz.Scheduler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +28,8 @@ import java.util.Map;
  */
 @Service
 public class ScheduleJobService extends CrudService<ScheduleJobDao, ScheduleJobEntity> {
+    protected Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private Scheduler scheduler;
 
@@ -91,7 +95,7 @@ public class ScheduleJobService extends CrudService<ScheduleJobDao, ScheduleJobE
     @Transactional
     public void run(String[] jobIds) {
         for (String jobId : jobIds) {
-            ScheduleUtils.run(scheduler, queryObject(jobId));
+            ScheduleUtils.run(scheduler, dao.queryObject(jobId));
         }
     }
 
