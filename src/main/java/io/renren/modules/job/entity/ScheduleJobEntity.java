@@ -14,7 +14,7 @@ import java.util.Date;
  * @date 2016年11月28日 下午12:54:44
  */
 public class ScheduleJobEntity extends DataEntity<ScheduleJobEntity> {
-    private static final long serialVersionUID = -6228183011286237991L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 任务调度参数key
