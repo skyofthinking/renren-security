@@ -3,7 +3,7 @@
 <head>
 <title>${comments}</title>
 #set($header='<#include "/header.html">')
-#set($save='<#if shiro.hasPermission("'+${pathName}+':save")>')
+#set($insert='<#if shiro.hasPermission("'+${pathName}+':insert")>')
 #set($update='<#if shiro.hasPermission("'+${pathName}+':update")>')
 #set($delete='<#if shiro.hasPermission("'+${pathName}+':delete")>')
 #set($end='</#if>')
@@ -13,7 +13,7 @@ $header
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
 		<div class="grid-btn">
-			$save
+			$insert
             <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
 			$end
 			$update
@@ -49,6 +49,6 @@ $header
 	</div>
 </div>
 
-<script src="${request.contextPath}/statics/js/modules/generator/${pathName}.js?_${.now?long}"></script>
+<script src="${request.contextPath}/statics/js/modules/${lastDir}/${pathName}.js?_${.now?long}"></script>
 </body>
 </html>

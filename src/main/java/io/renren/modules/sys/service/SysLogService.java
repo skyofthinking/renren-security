@@ -5,9 +5,6 @@ import io.renren.modules.sys.dao.SysLogDao;
 import io.renren.modules.sys.entity.SysLogEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * 系统日志
  *

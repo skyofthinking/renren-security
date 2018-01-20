@@ -1,6 +1,7 @@
 package io.renren.modules.gen.service;
 
 import io.renren.common.base.CrudService;
+import io.renren.common.utils.Query;
 import io.renren.modules.gen.dao.SysGeneratorDao;
 import io.renren.modules.gen.entity.SysGeneratorEntity;
 import io.renren.modules.gen.utils.GenUtils;
@@ -8,6 +9,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipOutputStream;
@@ -23,11 +25,17 @@ import java.util.zip.ZipOutputStream;
 public class SysGeneratorService extends CrudService<SysGeneratorDao, SysGeneratorEntity> {
 
     public Map<String, String> queryTable(String tableName) {
-        return dao.queryTable(tableName);
+        Map params = new HashMap();
+        params.put("tableName", tableName);
+        Query query = new Query(params);
+        return dao.queryTable(query);
     }
 
     public List<Map<String, String>> queryColumns(String tableName) {
-        return dao.queryColumns(tableName);
+        Map params = new HashMap();
+        params.put("tableName", tableName);
+        Query query = new Query(params);
+        return dao.queryColumns(query);
     }
 
     /**

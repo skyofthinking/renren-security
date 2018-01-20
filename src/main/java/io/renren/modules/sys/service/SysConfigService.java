@@ -54,21 +54,6 @@ public class SysConfigService extends CrudService<SysConfigDao, SysConfigEntity>
         super.deleteBatch(ids);
     }
 
-    public List<SysConfigEntity> queryList(Map<String, Object> map) {
-        if (map instanceof Query) {
-            PageHelper.startPage(map);
-        }
-        return super.queryList(map);
-    }
-
-    public int queryTotal(Map<String, Object> map) {
-        return super.queryTotal(map);
-    }
-
-    public SysConfigEntity queryObject(String id) {
-        return super.queryObject(id);
-    }
-
     /**
      * 根据key，获取配置的value值
      *

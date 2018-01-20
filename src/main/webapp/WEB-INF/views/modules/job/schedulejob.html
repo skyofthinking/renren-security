@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>定时任务</title>
+    <#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <#if shiro.hasPermission("schedulejob:insert")>
+                <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            </#if>
+            <#if shiro.hasPermission("schedulejob:update")>
+                <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            </#if>
+            <#if shiro.hasPermission("schedulejob:delete")>
+                <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+            </#if>
+            <#if shiro.hasPermission("schedulejob:info")>
+                <a class="btn btn-primary" @click="pause"><i class="fa fa-pause"></i>&nbsp;暂停</a>
+            </#if>
+            <#if shiro.hasPermission("schedulejob:info")>
+                <a class="btn btn-primary" @click="resume"><i class="fa fa-play"></i>&nbsp;恢复</a>
+            </#if>
+            <#if shiro.hasPermission("schedulejob:info")>
+                <a class="btn btn-primary" @click="runOnce"><i class="fa fa-arrow-circle-right"></i>&nbsp;立即执行</a>
+            </#if>
+            <#if shiro.hasPermission("schedulejob:info")>
+                <a class="btn btn-danger" style="float:right;" href="schedule_log.html">日志列表</a>
+            </#if>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">任务组</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="scheduleJob.jobGroup" placeholder="任务组"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">定时任务类</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="scheduleJob.jobClass" placeholder="定时任务类"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">Cron表达式</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="scheduleJob.cronExpression" placeholder="Cron表达式"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">描述</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="scheduleJob.description" placeholder="描述"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">数据</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="scheduleJob.data" placeholder=""/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/job/schedulejob.js?_${.now?long}"></script>
+</body>
+</html>

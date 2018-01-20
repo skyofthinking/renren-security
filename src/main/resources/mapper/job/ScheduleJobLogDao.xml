@@ -13,7 +13,7 @@
                 and job_id = #{jobId}
             </if>
         </where>
-        order by log_id desc
+        order by create_time desc
     </select>
 
     <select id="queryTotal" resultType="int">

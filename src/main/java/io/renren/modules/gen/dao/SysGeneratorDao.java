@@ -18,7 +18,7 @@ import java.util.Map;
 @Mapper
 public interface SysGeneratorDao extends CrudDao<SysGeneratorEntity> {
 
-    Map<String, String> queryTable(String tableName);
+    Map<String, String> queryTable(Map<String, Object> map);
 
-    List<Map<String, String>> queryColumns(String tableName);
+    List<Map<String, String>> queryColumns(Map<String, Object> map);
 }

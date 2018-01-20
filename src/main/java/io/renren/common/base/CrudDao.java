@@ -18,17 +18,17 @@ public interface CrudDao<T> extends BaseDao {
 
     public int update(Map<String, Object> map);
 
-    public int delete(Object id);
+    public int delete(String id);
 
     public int delete(Map<String, Object> map);
 
-    public int deleteBatch(Object[] id);
+    public int deleteBatch(String[] id);
 
-    public T queryObject(Object id);
+    public T queryObject(String id);
 
     public List<T> queryList(Map<String, Object> map);
 
-    public List<T> queryList(Object id);
+    public List<T> queryList(String id);
 
     public int queryTotal(Map<String, Object> map);
 

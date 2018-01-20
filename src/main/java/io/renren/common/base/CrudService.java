@@ -1,5 +1,7 @@
 package io.renren.common.base;
 
+import com.github.pagehelper.PageHelper;
+import io.renren.common.utils.Query;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,36 +34,39 @@ public abstract class CrudService<D extends CrudDao<T>, T extends BaseEntity<T>>
         dao.insertBatch(list);
     }
 
-    public int update(T t) {
+    public void update(T t) {
         t.preUpdate();
-        return dao.update(t);
+        dao.update(t);
     }
 
-    public int update(Map<String, Object> map) {
-        return dao.update(map);
+    public void update(Map<String, Object> map) {
+        dao.update(map);
     }
 
-    public int delete(Object id) {
-        return dao.delete(id);
+    public void delete(String id) {
+        dao.delete(id);
     }
 
-    public int delete(Map<String, Object> map) {
-        return dao.delete(map);
+    public void delete(Map<String, Object> map) {
+        dao.delete(map);
     }
 
-    public int deleteBatch(Object[] id) {
-        return dao.deleteBatch(id);
+    public void deleteBatch(String[] id) {
+        dao.deleteBatch(id);
     }
 
-    public T queryObject(Object id) {
+    public T queryObject(String id) {
         return dao.queryObject(id);
     }
 
     public List<T> queryList(Map<String, Object> map) {
+        if (map instanceof Query) {
+            PageHelper.startPage(map);
+        }
         return dao.queryList(map);
     }
 
-    public List<T> queryList(Object id) {
+    public List<T> queryList(String id) {
         return dao.queryList(id);
     }
 

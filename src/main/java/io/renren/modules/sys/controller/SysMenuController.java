@@ -76,7 +76,7 @@ public class SysMenuController extends BaseController {
      */
     @RequestMapping("/info/{menuId}")
     @RequiresPermissions("sys:menu:info")
-    public R info(@PathVariable("menuId") Long menuId) {
+    public R info(@PathVariable("menuId") String menuId) {
         SysMenuEntity menu = sysMenuService.queryObject(menuId);
         return R.ok().put("menu", menu);
     }

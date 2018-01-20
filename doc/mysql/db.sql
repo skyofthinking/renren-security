@@ -90,7 +90,7 @@ CREATE TABLE `qrtz_cron_triggers` (
 
 LOCK TABLES `qrtz_cron_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_cron_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_cron_triggers` VALUES ('RenrenScheduler','TASK_1','DEFAULT','0 0/30 * * * ?','Asia/Shanghai'),('RenrenScheduler','TASK_2','DEFAULT','0 0/30 * * * ?','Asia/Shanghai');
+INSERT INTO `qrtz_cron_triggers` VALUES ('RenrenScheduler','TASK_1','DEFAULT','0 0/5 * * * ?','Asia/Shanghai'),('RenrenScheduler','TASK_2','DEFAULT','0 0/5 * * * ?','Asia/Shanghai');
 /*!40000 ALTER TABLE `qrtz_cron_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +164,7 @@ CREATE TABLE `qrtz_job_details` (
 
 LOCK TABLES `qrtz_job_details` WRITE;
 /*!40000 ALTER TABLE `qrtz_job_details` DISABLE KEYS */;
-INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler','TASK_1','DEFAULT',NULL,'io.renren.modules.job.utils.ScheduleJob','0','0','0','0','¬í\0sr\0org.quartz.JobDataMapŸ°ƒè¿©°Ë\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap‚èÃûÅ](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMapæ.­(v\nÎ\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMapÚÁÃ`Ñ\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xpt\0testTasksr\0java.util.DatehjKYt\0\0xpw\0\0Xºõ“0xt\00 0/30 * * * ?sr\0java.lang.Long;‹äÌ#ß\0J\0valuexr\0java.lang.Number†¬•”à‹\0\0xp\0\0\0\0\0\0\0t\0testt\0renrent\0æœ‰å‚æ•°æµ‹è¯•sr\0java.lang.Integerâ ¤÷‡8\0I\0valuexq\0~\0\0\0\0\0x\0'),('RenrenScheduler','TASK_2','DEFAULT',NULL,'io.renren.modules.job.utils.ScheduleJob','0','0','0','0','¬í\0sr\0org.quartz.JobDataMapŸ°ƒè¿©°Ë\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap‚èÃûÅ](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMapæ.­(v\nÎ\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMapÚÁÃ`Ñ\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xpt\0testTasksr\0java.util.DatehjKYt\0\0xpw\0\0XÃwÄ`xt\00 0/30 * * * ?sr\0java.lang.Long;‹äÌ#ß\0J\0valuexr\0java.lang.Number†¬•”à‹\0\0xp\0\0\0\0\0\0\0t\0test2pt\0æ— å‚æ•°æµ‹è¯•sr\0java.lang.Integerâ ¤÷‡8\0I\0valuexq\0~\0\0\0\0x\0');
+INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler','TASK_1','DEFAULT',NULL,'io.renren.modules.job.utils.ScheduleJob','0','0','0','0','¬í\0sr\0org.quartz.JobDataMapŸ°ƒè¿©°Ë\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap‚èÃûÅ](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMapæ.­(v\nÎ\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMapÚÁÃ`Ñ\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xr\0 io.renren.common.base.DataEntity×\ZŸ»ØZ\0L\0createByt\0,Lio/renren/modules/sys/entity/SysUserEntity;L\0\ncreateDateq\0~\0\nL\0delFlagq\0~\0	L\0remarksq\0~\0	L\0updateByq\0~\0\rL\0\nupdateDateq\0~\0\nxr\0 io.renren.common.base.BaseEntity\0\0\0\0\0\0\0\0Z\0isNewRecordL\0currentUserq\0~\0\rL\0sqlMapq\0~\0L\0uidq\0~\0	xp\0ppt\01ppt\00pppt\0testTasksr\0java.util.DatehjKYt\0\0xpw\0\0Xºõ“0xt\0\r0 0/5 * * * ?t\0testt\0renrent\0æœ‰å‚æ•°æµ‹è¯•sr\0java.lang.Integerâ ¤÷‡8\0I\0valuexr\0java.lang.Number†¬•”à‹\0\0xp\0\0\0\0x\0'),('RenrenScheduler','TASK_2','DEFAULT',NULL,'io.renren.modules.job.utils.ScheduleJob','0','0','0','0','¬í\0sr\0org.quartz.JobDataMapŸ°ƒè¿©°Ë\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap‚èÃûÅ](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMapæ.­(v\nÎ\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMapÚÁÃ`Ñ\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xr\0 io.renren.common.base.DataEntity×\ZŸ»ØZ\0L\0createByt\0,Lio/renren/modules/sys/entity/SysUserEntity;L\0\ncreateDateq\0~\0\nL\0delFlagq\0~\0	L\0remarksq\0~\0	L\0updateByq\0~\0\rL\0\nupdateDateq\0~\0\nxr\0 io.renren.common.base.BaseEntity\0\0\0\0\0\0\0\0Z\0isNewRecordL\0currentUserq\0~\0\rL\0sqlMapq\0~\0L\0uidq\0~\0	xp\0ppt\02ppt\00pppt\0testTasksr\0java.util.DatehjKYt\0\0xpw\0\0XÃwÄ`xt\0\r0 0/5 * * * ?t\0test2pt\0æ— å‚æ•°æµ‹è¯•sr\0java.lang.Integerâ ¤÷‡8\0I\0valuexr\0java.lang.Number†¬•”à‹\0\0xp\0\0\0x\0');
 /*!40000 ALTER TABLE `qrtz_job_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +188,7 @@ CREATE TABLE `qrtz_locks` (
 
 LOCK TABLES `qrtz_locks` WRITE;
 /*!40000 ALTER TABLE `qrtz_locks` DISABLE KEYS */;
-INSERT INTO `qrtz_locks` VALUES ('RenrenScheduler','STATE_ACCESS'),('RenrenScheduler','TRIGGER_ACCESS');
+INSERT INTO `qrtz_locks` VALUES ('RenrenScheduler','STATE_ACCESS'),('RenrenScheduler','TRIGGER_ACCESS'),('schedulerFactoryBean','STATE_ACCESS'),('schedulerFactoryBean','TRIGGER_ACCESS');
 /*!40000 ALTER TABLE `qrtz_locks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +237,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler','WIN-017122716491515462511010',1515464739542,15000);
+INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler','WIN-017122716491516334952975',1516337299613,15000),('schedulerFactoryBean','WIN-017122716491516437864332',1516438693266,20000);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,7 +352,7 @@ CREATE TABLE `qrtz_triggers` (
 
 LOCK TABLES `qrtz_triggers` WRITE;
 /*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
-INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler','TASK_1','DEFAULT','TASK_1','DEFAULT',NULL,1515465000000,1515463200000,5,'WAITING','CRON',1515462304000,0,NULL,2,'¬í\0sr\0org.quartz.JobDataMapŸ°ƒè¿©°Ë\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap‚èÃûÅ](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMapæ.­(v\nÎ\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMapÚÁÃ`Ñ\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xpt\0testTasksr\0java.util.DatehjKYt\0\0xpw\0\0Xºõ“0xt\00 0/30 * * * ?sr\0java.lang.Long;‹äÌ#ß\0J\0valuexr\0java.lang.Number†¬•”à‹\0\0xp\0\0\0\0\0\0\0t\0testt\0renrent\0æœ‰å‚æ•°æµ‹è¯•sr\0java.lang.Integerâ ¤÷‡8\0I\0valuexq\0~\0\0\0\0\0x\0'),('RenrenScheduler','TASK_2','DEFAULT','TASK_2','DEFAULT',NULL,1515463200000,-1,5,'PAUSED','CRON',1515462304000,0,NULL,2,'¬í\0sr\0org.quartz.JobDataMapŸ°ƒè¿©°Ë\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap‚èÃûÅ](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMapæ.­(v\nÎ\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMapÚÁÃ`Ñ\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xpt\0testTasksr\0java.util.DatehjKYt\0\0xpw\0\0XÃwÄ`xt\00 0/30 * * * ?sr\0java.lang.Long;‹äÌ#ß\0J\0valuexr\0java.lang.Number†¬•”à‹\0\0xp\0\0\0\0\0\0\0t\0test2pt\0æ— å‚æ•°æµ‹è¯•sr\0java.lang.Integerâ ¤÷‡8\0I\0valuexq\0~\0\0\0\0x\0');
+INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler','TASK_1','DEFAULT','TASK_1','DEFAULT',NULL,1516337400000,1516337100000,5,'WAITING','CRON',1516330527000,0,NULL,2,'¬í\0sr\0org.quartz.JobDataMapŸ°ƒè¿©°Ë\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap‚èÃûÅ](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMapæ.­(v\nÎ\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMapÚÁÃ`Ñ\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xr\0 io.renren.common.base.DataEntity×\ZŸ»ØZ\0L\0createByt\0,Lio/renren/modules/sys/entity/SysUserEntity;L\0\ncreateDateq\0~\0\nL\0delFlagq\0~\0	L\0remarksq\0~\0	L\0updateByq\0~\0\rL\0\nupdateDateq\0~\0\nxr\0 io.renren.common.base.BaseEntity\0\0\0\0\0\0\0\0Z\0isNewRecordL\0currentUserq\0~\0\rL\0sqlMapq\0~\0L\0uidq\0~\0	xp\0ppt\01ppt\00pppt\0testTasksr\0java.util.DatehjKYt\0\0xpw\0\0Xºõ“0xt\0\r0 0/5 * * * ?t\0testt\0renrent\0æœ‰å‚æ•°æµ‹è¯•sr\0java.lang.Integerâ ¤÷‡8\0I\0valuexr\0java.lang.Number†¬•”à‹\0\0xp\0\0\0\0x\0'),('RenrenScheduler','TASK_2','DEFAULT','TASK_2','DEFAULT',NULL,1516330800000,-1,5,'PAUSED','CRON',1516330527000,0,NULL,2,'¬í\0sr\0org.quartz.JobDataMapŸ°ƒè¿©°Ë\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap‚èÃûÅ](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMapæ.­(v\nÎ\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMapÚÁÃ`Ñ\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0\rJOB_PARAM_KEYsr\0.io.renren.modules.job.entity.ScheduleJobEntity\0\0\0\0\0\0\0\0L\0beanNamet\0Ljava/lang/String;L\0\ncreateTimet\0Ljava/util/Date;L\0cronExpressionq\0~\0	L\0\nmethodNameq\0~\0	L\0paramsq\0~\0	L\0remarkq\0~\0	L\0statust\0Ljava/lang/Integer;xr\0 io.renren.common.base.DataEntity×\ZŸ»ØZ\0L\0createByt\0,Lio/renren/modules/sys/entity/SysUserEntity;L\0\ncreateDateq\0~\0\nL\0delFlagq\0~\0	L\0remarksq\0~\0	L\0updateByq\0~\0\rL\0\nupdateDateq\0~\0\nxr\0 io.renren.common.base.BaseEntity\0\0\0\0\0\0\0\0Z\0isNewRecordL\0currentUserq\0~\0\rL\0sqlMapq\0~\0L\0uidq\0~\0	xp\0ppt\02ppt\00pppt\0testTasksr\0java.util.DatehjKYt\0\0xpw\0\0XÃwÄ`xt\0\r0 0/5 * * * ?t\0test2pt\0æ— å‚æ•°æµ‹è¯•sr\0java.lang.Integerâ ¤÷‡8\0I\0valuexr\0java.lang.Number†¬•”à‹\0\0xp\0\0\0x\0');
 /*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,16 +364,14 @@ DROP TABLE IF EXISTS `schedule_job`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule_job` (
-  `job_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ä»»åŠ¡id',
-  `bean_name` varchar(200) DEFAULT NULL COMMENT 'spring beanåç§°',
-  `method_name` varchar(100) DEFAULT NULL COMMENT 'æ–¹æ³•å',
-  `params` varchar(2000) DEFAULT NULL COMMENT 'å‚æ•°',
-  `cron_expression` varchar(100) DEFAULT NULL COMMENT 'cronè¡¨è¾¾å¼',
-  `status` tinyint(4) DEFAULT NULL COMMENT 'ä»»åŠ¡çŠ¶æ€  0ï¼šæ­£å¸¸  1ï¼šæš‚åœ',
-  `remark` varchar(255) DEFAULT NULL COMMENT 'å¤‡æ³¨',
-  `create_time` datetime DEFAULT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
-  PRIMARY KEY (`job_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='å®šæ—¶ä»»åŠ¡';
+  `uid` varchar(64) COLLATE utf8_bin NOT NULL,
+  `job_group` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT 'ä»»åŠ¡ç»„',
+  `job_class` varchar(500) COLLATE utf8_bin DEFAULT NULL COMMENT 'å®šæ—¶ä»»åŠ¡ç±»',
+  `cron_expression` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT 'Cronè¡¨è¾¾å¼',
+  `description` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT 'æè¿°',
+  `data` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='å®šæ—¶ä»»åŠ¡';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -382,7 +380,6 @@ CREATE TABLE `schedule_job` (
 
 LOCK TABLES `schedule_job` WRITE;
 /*!40000 ALTER TABLE `schedule_job` DISABLE KEYS */;
-INSERT INTO `schedule_job` VALUES (1,'testTask','test','renren','0 0/30 * * * ?',0,'æœ‰å‚æ•°æµ‹è¯•','2016-12-01 23:16:46'),(2,'testTask','test2',NULL,'0 0/30 * * * ?',1,'æ— å‚æ•°æµ‹è¯•','2016-12-03 14:55:56');
 /*!40000 ALTER TABLE `schedule_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,8 +391,8 @@ DROP TABLE IF EXISTS `schedule_job_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule_job_log` (
-  `log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ä»»åŠ¡æ—¥å¿—id',
-  `job_id` bigint(20) NOT NULL COMMENT 'ä»»åŠ¡id',
+  `uid` varchar(64) NOT NULL,
+  `job_id` varchar(64) NOT NULL,
   `bean_name` varchar(200) DEFAULT NULL COMMENT 'spring beanåç§°',
   `method_name` varchar(100) DEFAULT NULL COMMENT 'æ–¹æ³•å',
   `params` varchar(2000) DEFAULT NULL COMMENT 'å‚æ•°',
@@ -403,9 +400,9 @@ CREATE TABLE `schedule_job_log` (
   `error` varchar(2000) DEFAULT NULL COMMENT 'å¤±è´¥ä¿¡æ¯',
   `times` int(11) NOT NULL COMMENT 'è€—æ—¶(å•ä½ï¼šæ¯«ç§’)',
   `create_time` datetime DEFAULT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
-  PRIMARY KEY (`log_id`),
+  PRIMARY KEY (`uid`),
   KEY `job_id` (`job_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='å®šæ—¶ä»»åŠ¡æ—¥å¿—';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='å®šæ—¶ä»»åŠ¡æ—¥å¿—';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -414,7 +411,6 @@ CREATE TABLE `schedule_job_log` (
 
 LOCK TABLES `schedule_job_log` WRITE;
 /*!40000 ALTER TABLE `schedule_job_log` DISABLE KEYS */;
-INSERT INTO `schedule_job_log` VALUES (1,1,'testTask','test','renren',0,NULL,1009,'2018-01-09 10:00:00');
 /*!40000 ALTER TABLE `schedule_job_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -534,7 +530,7 @@ CREATE TABLE `sys_menu` (
 
 LOCK TABLES `sys_menu` WRITE;
 /*!40000 ALTER TABLE `sys_menu` DISABLE KEYS */;
-INSERT INTO `sys_menu` VALUES ('1','0','ç³»ç»Ÿç®¡ç†',NULL,NULL,0,'fa fa-cog',0,'1'),('10','6','åˆ é™¤',NULL,'sys:schedule:delete',2,NULL,0,'1'),('11','6','æš‚åœ',NULL,'sys:schedule:pause',2,NULL,0,'1'),('12','6','æ¢å¤',NULL,'sys:schedule:resume',2,NULL,0,'1'),('13','6','ç«‹å³æ‰§è¡Œ',NULL,'sys:schedule:run',2,NULL,0,'1'),('14','6','æ—¥å¿—åˆ—è¡¨',NULL,'sys:schedule:log',2,NULL,0,'1'),('15','2','æŸ¥çœ‹',NULL,'sys:user:list,sys:user:info',2,NULL,0,'1'),('16','2','æ–°å¢',NULL,'sys:user:save,sys:role:select',2,NULL,0,'1'),('17','2','ä¿®æ”¹',NULL,'sys:user:update,sys:role:select',2,NULL,0,'1'),('18','2','åˆ é™¤',NULL,'sys:user:delete',2,NULL,0,'1'),('19','3','æŸ¥çœ‹',NULL,'sys:role:list,sys:role:info',2,NULL,0,'1'),('2','1','ç®¡ç†å‘˜ç®¡ç†','modules/sys/user.html',NULL,1,'fa fa-user',1,'1'),('20','3','æ–°å¢',NULL,'sys:role:save,sys:menu:perms',2,NULL,0,'1'),('21','3','ä¿®æ”¹',NULL,'sys:role:update,sys:menu:perms',2,NULL,0,'1'),('22','3','åˆ é™¤',NULL,'sys:role:delete',2,NULL,0,'1'),('23','4','æŸ¥çœ‹',NULL,'sys:menu:list,sys:menu:info',2,NULL,0,'1'),('24','4','æ–°å¢',NULL,'sys:menu:save,sys:menu:select',2,NULL,0,'1'),('25','4','ä¿®æ”¹',NULL,'sys:menu:update,sys:menu:select',2,NULL,0,'1'),('26','4','åˆ é™¤',NULL,'sys:menu:delete',2,NULL,0,'1'),('27','1','å‚æ•°ç®¡ç†','modules/sys/config.html','sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete',1,'fa fa-sun-o',6,'1'),('28','1','ä»£ç ç”Ÿæˆå™¨','modules/gen/generator.html','sys:generator:list,sys:generator:code',1,'fa fa-rocket',8,'1'),('29','1','ç³»ç»Ÿæ—¥å¿—','modules/sys/log.html','sys:log:list',1,'fa fa-file-text-o',7,'1'),('3','1','è§’è‰²ç®¡ç†','modules/sys/role.html',NULL,1,'fa fa-user-secret',2,'1'),('30','1','æ–‡ä»¶ä¸Šä¼ ','modules/oss/oss.html','sys:oss:all',1,'fa fa-file-image-o',6,'1'),('31','1','éƒ¨é—¨ç®¡ç†','modules/sys/dept.html',NULL,1,'fa fa-file-code-o',1,'1'),('32','31','æŸ¥çœ‹',NULL,'sys:dept:list,sys:dept:info',2,NULL,0,'1'),('33','31','æ–°å¢',NULL,'sys:dept:save,sys:dept:select',2,NULL,0,'1'),('34','31','ä¿®æ”¹',NULL,'sys:dept:update,sys:dept:select',2,NULL,0,'1'),('35','31','åˆ é™¤',NULL,'sys:dept:delete',2,NULL,0,'1'),('4','1','èœå•ç®¡ç†','modules/sys/menu.html',NULL,1,'fa fa-th-list',3,'1'),('5','1','SQLç›‘æ§','druid/sql.html',NULL,1,'fa fa-bug',4,'1'),('6','1','å®šæ—¶ä»»åŠ¡','modules/job/schedule.html',NULL,1,'fa fa-tasks',5,'1'),('7','6','æŸ¥çœ‹',NULL,'sys:schedule:list,sys:schedule:info',2,NULL,0,'1'),('8','6','æ–°å¢',NULL,'sys:schedule:save',2,NULL,0,'1'),('9','6','ä¿®æ”¹',NULL,'sys:schedule:update',2,NULL,0,'1');
+INSERT INTO `sys_menu` VALUES ('09f1b08d929745c8afa0ed57fdbcb9b3','6e91fbc3a63d4cb1b98d84259a800384','æ–°å¢',NULL,'schedulejob:insert',2,NULL,6,'0'),('1','0','ç³»ç»Ÿç®¡ç†',NULL,NULL,0,'fa fa-cog',0,'1'),('137a843193484c059d757100553089ad','6e91fbc3a63d4cb1b98d84259a800384','åˆ é™¤',NULL,'schedulejob:delete',2,NULL,6,'0'),('13bc16c02d1344cc82eac34e9ba55c92','6e91fbc3a63d4cb1b98d84259a800384','æŸ¥çœ‹',NULL,'schedulejob:list,schedulejob:info',2,NULL,6,'0'),('15','2','æŸ¥çœ‹',NULL,'sys:user:list,sys:user:info',2,NULL,0,'1'),('16','2','æ–°å¢',NULL,'sys:user:save,sys:role:select',2,NULL,0,'1'),('17','2','ä¿®æ”¹',NULL,'sys:user:update,sys:role:select',2,NULL,0,'1'),('18','2','åˆ é™¤',NULL,'sys:user:delete',2,NULL,0,'1'),('19','3','æŸ¥çœ‹',NULL,'sys:role:list,sys:role:info',2,NULL,0,'1'),('2','1','ç®¡ç†å‘˜ç®¡ç†','modules/sys/user.html',NULL,1,'fa fa-user',1,'1'),('20','3','æ–°å¢',NULL,'sys:role:save,sys:menu:perms',2,NULL,0,'1'),('21','3','ä¿®æ”¹',NULL,'sys:role:update,sys:menu:perms',2,NULL,0,'1'),('22','3','åˆ é™¤',NULL,'sys:role:delete',2,NULL,0,'1'),('23','4','æŸ¥çœ‹',NULL,'sys:menu:list,sys:menu:info',2,NULL,0,'1'),('24','4','æ–°å¢',NULL,'sys:menu:save,sys:menu:select',2,NULL,0,'1'),('25','4','ä¿®æ”¹',NULL,'sys:menu:update,sys:menu:select',2,NULL,0,'1'),('26','4','åˆ é™¤',NULL,'sys:menu:delete',2,NULL,0,'1'),('27','1','å‚æ•°ç®¡ç†','modules/sys/config.html','sys:config:list,sys:config:info,sys:config:save,sys:config:update,sys:config:delete',1,'fa fa-sun-o',6,'1'),('28','1','ä»£ç ç”Ÿæˆå™¨','modules/gen/generator.html','sys:generator:list,sys:generator:code',1,'fa fa-rocket',8,'1'),('29','1','ç³»ç»Ÿæ—¥å¿—','modules/sys/log.html','sys:log:list',1,'fa fa-file-text-o',7,'1'),('3','1','è§’è‰²ç®¡ç†','modules/sys/role.html',NULL,1,'fa fa-user-secret',2,'1'),('30','1','æ–‡ä»¶ä¸Šä¼ ','modules/oss/oss.html','sys:oss:all',1,'fa fa-file-image-o',6,'1'),('31','1','éƒ¨é—¨ç®¡ç†','modules/sys/dept.html',NULL,1,'fa fa-file-code-o',1,'1'),('32','31','æŸ¥çœ‹',NULL,'sys:dept:list,sys:dept:info',2,NULL,0,'1'),('33','31','æ–°å¢',NULL,'sys:dept:save,sys:dept:select',2,NULL,0,'1'),('34','31','ä¿®æ”¹',NULL,'sys:dept:update,sys:dept:select',2,NULL,0,'1'),('35','31','åˆ é™¤',NULL,'sys:dept:delete',2,NULL,0,'1'),('4','1','èœå•ç®¡ç†','modules/sys/menu.html',NULL,1,'fa fa-th-list',3,'1'),('5','1','SQLç›‘æ§','druid/sql.html',NULL,1,'fa fa-bug',4,'1'),('6e91fbc3a63d4cb1b98d84259a800384','1','å®šæ—¶ä»»åŠ¡','modules/job/schedulejob.html',NULL,1,'fa fa-file-code-o',6,'0'),('787af15dff6c421897a83d51adc09680','6e91fbc3a63d4cb1b98d84259a800384','ä¿®æ”¹',NULL,'schedulejob:update',2,NULL,6,'0');
 /*!40000 ALTER TABLE `sys_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -705,4 +701,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-09 17:29:43
+-- Dump completed on 2018-01-20 16:58:32

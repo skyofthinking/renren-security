@@ -82,7 +82,7 @@ public class SysDeptController extends BaseController {
      */
     @RequestMapping("/info/{deptId}")
     @RequiresPermissions("sys:dept:info")
-    public R info(@PathVariable("deptId") Long deptId) {
+    public R info(@PathVariable("deptId") String deptId) {
         SysDeptEntity dept = sysDeptService.queryObject(deptId);
 
         return R.ok().put("dept", dept);

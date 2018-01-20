@@ -1,21 +1,23 @@
 package io.renren.modules.job.service;
 
-import io.renren.common.base.CrudService;
+import com.github.pagehelper.PageHelper;
 import io.renren.common.utils.Constant;
-import io.renren.modules.job.dao.ScheduleJobDao;
+import io.renren.common.utils.Query;
 import io.renren.modules.job.entity.ScheduleJobEntity;
-import io.renren.modules.job.utils.ScheduleUtils;
-import org.quartz.CronTrigger;
+import io.renren.modules.job.dao.ScheduleJobDao;
+import io.renren.common.base.CrudService;
+import io.renren.modules.job.helper.JobDynamicScheduler;
+import io.renren.modules.sys.entity.SysConfigEntity;
+import org.quartz.CronExpression;
 import org.quartz.Scheduler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,102 +26,134 @@ import java.util.Map;
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2016年11月28日 上午9:55:32
+ * @date 2018-01-20 14:47:22
  */
 @Service
 public class ScheduleJobService extends CrudService<ScheduleJobDao, ScheduleJobEntity> {
-    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private Scheduler scheduler;
+    @Qualifier("schedulerFactoryBean")
+    private SchedulerFactoryBean schedulerFactoryBean;
 
-    /**
-     * 项目启动时，初始化定时器
-     */
-    @PostConstruct
-    public void init() {
-        List<ScheduleJobEntity> scheduleJobList = dao.queryList(new HashMap<String, Object>());
-        for (ScheduleJobEntity scheduleJob : scheduleJobList) {
-            logger.info("scheduleJob " + scheduleJob);
-            CronTrigger cronTrigger = ScheduleUtils.getCronTrigger(scheduler, scheduleJob.getUid());
-            //如果不存在，则创建
-            if (cronTrigger == null) {
-                ScheduleUtils.createScheduleJob(scheduler, scheduleJob);
-            } else {
-                ScheduleUtils.updateScheduleJob(scheduler, scheduleJob);
+    public List<ScheduleJobEntity> queryList(Map<String, Object> map) {
+        List<ScheduleJobEntity> scheduleJobEntityList = dao.queryList(map);
+        Scheduler scheduler = schedulerFactoryBean.getScheduler();
+        for (ScheduleJobEntity mScheduleJobEntity : scheduleJobEntityList) {
+            JobDynamicScheduler.fillScheduleJobEntity(scheduler, mScheduleJobEntity);
+        }
+        return scheduleJobEntityList;
+    }
+
+    @Override
+    public void insert(ScheduleJobEntity scheduleJobEntity) {
+        super.save(scheduleJobEntity);
+        String jobName = scheduleJobEntity.getUid();
+        String jobGroup = scheduleJobEntity.getJobGroup();
+        Scheduler scheduler = schedulerFactoryBean.getScheduler();
+        try {
+            JobDynamicScheduler.addJob(scheduler, jobName, jobGroup, scheduleJobEntity.getCronExpression(), scheduleJobEntity.getJobClass());
+        } catch (SchedulerException e) {
+            logger.error(e.getMessage(), e);
+            try {
+                super.delete(scheduleJobEntity.getUid());
+                JobDynamicScheduler.removeJob(scheduler, jobName, jobGroup);
+            } catch (SchedulerException se) {
+                logger.error(e.getMessage(), se);
             }
         }
     }
 
-    @Transactional
-    public void insert(ScheduleJobEntity scheduleJob) {
-        scheduleJob.setCreateTime(new Date());
-        scheduleJob.setStatus(Constant.ScheduleStatus.NORMAL.getValue());
-        dao.insert(scheduleJob);
-
-        ScheduleUtils.createScheduleJob(scheduler, scheduleJob);
-    }
-
-    @Transactional
-    public int update(ScheduleJobEntity scheduleJob) {
-        ScheduleUtils.updateScheduleJob(scheduler, scheduleJob);
-        return dao.update(scheduleJob);
-    }
-
-    /**
-     * 批量删除定时任务
-     */
-    @Transactional
-    public void deleteBatch(String[] jobIds) {
-        for (String jobId : jobIds) {
-            ScheduleUtils.deleteScheduleJob(scheduler, jobId);
+    @Override
+    public void update(ScheduleJobEntity scheduleJobEntity) {
+        super.update(scheduleJobEntity);
+        String jobName = scheduleJobEntity.getUid();
+        String jobGroup = scheduleJobEntity.getJobGroup();
+        try {
+            boolean ret = JobDynamicScheduler.rescheduleJob(schedulerFactoryBean.getScheduler(), jobGroup, jobName, scheduleJobEntity.getCronExpression());
+        } catch (SchedulerException e) {
+            logger.error(e.getMessage(), e);
         }
-
-        //删除数据
-        dao.deleteBatch(jobIds);
     }
 
-    /**
-     * 批量更新定时任务状态
-     */
-    public int updateBatch(String[] jobIds, int status) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("list", jobIds);
-        map.put("status", status);
-        return dao.updateBatch(map);
+    @Override
+    public void deleteBatch(String[] uids) {
+        for (String uid : uids) {
+            ScheduleJobEntity scheduleJobEntity = super.queryObject(uid);
+            String jobName = scheduleJobEntity.getUid();
+            String jobGroup = scheduleJobEntity.getJobGroup();
+            try {
+                JobDynamicScheduler.removeJob(schedulerFactoryBean.getScheduler(), jobName, jobGroup);
+                super.delete(uid);
+            } catch (SchedulerException e) {
+                logger.error(e.getMessage(), e);
+            }
+        }
     }
 
-    /**
-     * 立即执行
-     */
-    @Transactional
-    public void run(String[] jobIds) {
-        for (String jobId : jobIds) {
-            ScheduleUtils.run(scheduler, dao.queryObject(jobId));
+    @Override
+    public void delete(String uid) {
+        ScheduleJobEntity scheduleJobEntity = super.queryObject(uid);
+        String jobName = scheduleJobEntity.getUid();
+        String jobGroup = scheduleJobEntity.getJobGroup();
+        try {
+            JobDynamicScheduler.removeJob(schedulerFactoryBean.getScheduler(), jobName, jobGroup);
+            super.delete(uid);
+        } catch (SchedulerException e) {
+            logger.error(e.getMessage(), e);
         }
     }
 
     /**
-     * 暂停运行
-     */
-    @Transactional
-    public void pause(String[] jobIds) {
-        for (String jobId : jobIds) {
-            ScheduleUtils.pauseJob(scheduler, jobId);
+     * 暂停任务
+     **/
+    public boolean pause(String[] uids) {
+        for (String uid : uids) {
+            ScheduleJobEntity scheduleJobEntity = super.queryObject(uid);
+            String jobName = scheduleJobEntity.getUid();
+            String jobGroup = scheduleJobEntity.getJobGroup();
+            try {
+                JobDynamicScheduler.pauseJob(schedulerFactoryBean.getScheduler(), jobName, jobGroup);    // JobStatus Do Not Store
+            } catch (SchedulerException e) {
+                logger.error(e.getMessage(), e);
+                return false;
+            }
         }
-
-        updateBatch(jobIds, Constant.ScheduleStatus.PAUSE.getValue());
+        return true;
     }
 
     /**
-     * 恢复运行
-     */
-    @Transactional
-    public void resume(String[] jobIds) {
-        for (String jobId : jobIds) {
-            ScheduleUtils.resumeJob(scheduler, jobId);
+     * 恢复任务
+     **/
+    public boolean resume(String[] uids) {
+        for (String uid : uids) {
+            ScheduleJobEntity scheduleJobEntity = super.queryObject(uid);
+            String jobName = scheduleJobEntity.getUid();
+            String jobGroup = scheduleJobEntity.getJobGroup();
+            try {
+                JobDynamicScheduler.resumeJob(schedulerFactoryBean.getScheduler(), jobName, jobGroup);
+            } catch (SchedulerException e) {
+                logger.error(e.getMessage(), e);
+                return false;
+            }
         }
+        return true;
+    }
 
-        updateBatch(jobIds, Constant.ScheduleStatus.NORMAL.getValue());
+    /**
+     * 执行任务
+     **/
+    public boolean run(String[] uids) {
+        for (String uid : uids) {
+            ScheduleJobEntity scheduleJobEntity = super.queryObject(uid);
+            String jobName = scheduleJobEntity.getUid();
+            String jobGroup = scheduleJobEntity.getJobGroup();
+            try {
+                JobDynamicScheduler.triggerJob(schedulerFactoryBean.getScheduler(), jobName, jobGroup, scheduleJobEntity.getCronExpression(), scheduleJobEntity.getJobClass());
+            } catch (SchedulerException e) {
+                logger.error(e.getMessage(), e);
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -1,8 +1,6 @@
 package io.renren.modules.job.dao;
 
 import io.renren.common.base.CrudDao;
-import io.renren.modules.job.entity.ScheduleJobEntity;
-import io.renren.modules.sys.dao.BaseDao;
 import io.renren.modules.job.entity.ScheduleJobLogEntity;
 import org.apache.ibatis.annotations.Mapper;
 

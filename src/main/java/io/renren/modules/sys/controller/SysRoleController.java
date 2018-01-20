@@ -127,7 +127,7 @@ public class SysRoleController extends BaseController {
     @SysLog("删除角色")
     @RequestMapping("/delete")
     @RequiresPermissions("sys:role:delete")
-    public R delete(@RequestBody Long[] roleIds) {
+    public R delete(@RequestBody String[] roleIds) {
         sysRoleService.deleteBatch(roleIds);
 
         return R.ok();

@@ -82,18 +82,16 @@ public class SysUserService extends CrudService<SysUserDao, SysUserEntity> {
 
     @Override
     @Transactional
-    public int update(SysUserEntity user) {
+    public void update(SysUserEntity user) {
         if (StringUtils.isBlank(user.getPassword())) {
             user.setPassword(null);
         } else {
             user.setPassword(ShiroUtils.sha256(user.getPassword(), user.getSalt()));
         }
-        int count = dao.update(user);
+        dao.update(user);
 
         //保存用户与角色关系
         sysUserRoleService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
-
-        return count;
     }
 
 

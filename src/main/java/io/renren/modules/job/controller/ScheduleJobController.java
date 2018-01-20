@@ -1,134 +1,138 @@
 package io.renren.modules.job.controller;
 
-import io.renren.common.annotation.SysLog;
+import java.util.List;
+import java.util.Map;
+
+import io.renren.common.validator.ValidatorUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.quartz.CronExpression;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import io.renren.common.base.BaseController;
+
+import io.renren.modules.job.entity.ScheduleJobEntity;
+import io.renren.modules.job.service.ScheduleJobService;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.Query;
 import io.renren.common.utils.R;
-import io.renren.common.validator.ValidatorUtils;
-import io.renren.modules.job.entity.ScheduleJobEntity;
-import io.renren.modules.job.service.ScheduleJobService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
+import com.github.pagehelper.PageInfo;
 
 /**
  * 定时任务
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2016年11月28日 下午2:16:40
+ * @date 2018-01-20 14:47:22
  */
 @RestController
-@RequestMapping("/sys/schedule")
+@RequestMapping("schedulejob")
 public class ScheduleJobController extends BaseController {
     @Autowired
     private ScheduleJobService scheduleJobService;
 
     /**
-     * 定时任务列表
+     * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("sys:schedule:list")
+    @RequiresPermissions("schedulejob:list")
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<ScheduleJobEntity> jobList = scheduleJobService.queryList(query);
-        int total = scheduleJobService.queryTotal(query);
 
-        PageUtils pageUtil = new PageUtils(jobList, total, query.getLimit(), query.getPage());
+        List<ScheduleJobEntity> scheduleJobList = scheduleJobService.queryList(query);
+        PageInfo page = new PageInfo(scheduleJobList);
+        int total = (int) page.getTotal();
 
-        return R.ok().put("page", pageUtil);
+        PageUtils pageUtils = new PageUtils(scheduleJobList, total, query.getLimit(), query.getPage());
+
+        return R.ok().put("page", pageUtils);
     }
 
     /**
-     * 定时任务信息
+     * 信息
      */
-    @RequestMapping("/info/{jobId}")
-    @RequiresPermissions("sys:schedule:info")
-    public R info(@PathVariable("jobId") Long jobId) {
-        ScheduleJobEntity schedule = scheduleJobService.queryObject(jobId);
+    @RequestMapping("/info/{uid}")
+    @RequiresPermissions("schedulejob:info")
+    public R info(@PathVariable("uid") String uid) {
+        ScheduleJobEntity scheduleJob = scheduleJobService.queryObject(uid);
 
-        return R.ok().put("schedule", schedule);
+        return R.ok().put("scheduleJob", scheduleJob);
     }
 
     /**
-     * 保存定时任务
+     * 保存
      */
-    @SysLog("保存定时任务")
-    @RequestMapping("/save")
-    @RequiresPermissions("sys:schedule:save")
-    public R save(@RequestBody ScheduleJobEntity scheduleJob) {
+    @RequestMapping("/insert")
+    @RequiresPermissions("schedulejob:insert")
+    public R insert(@RequestBody ScheduleJobEntity scheduleJob) {
         ValidatorUtils.validateEntity(scheduleJob);
-
-        scheduleJobService.insert(scheduleJob);
-
+        if (!CronExpression.isValidExpression(scheduleJob.getCronExpression())) {
+            return R.error("请输入格式正确的Cron表达式");
+        }
+        scheduleJobService.save(scheduleJob);
         return R.ok();
     }
 
     /**
-     * 修改定时任务
+     * 修改
      */
-    @SysLog("修改定时任务")
     @RequestMapping("/update")
-    @RequiresPermissions("sys:schedule:update")
+    @RequiresPermissions("schedulejob:update")
     public R update(@RequestBody ScheduleJobEntity scheduleJob) {
         ValidatorUtils.validateEntity(scheduleJob);
-
-        scheduleJobService.update(scheduleJob);
-
+        if (!CronExpression.isValidExpression(scheduleJob.getCronExpression())) {
+            return R.error("请输入格式正确的Cron表达式");
+        }
+        scheduleJobService.save(scheduleJob);
         return R.ok();
     }
 
     /**
-     * 删除定时任务
+     * 删除
      */
-    @SysLog("删除定时任务")
     @RequestMapping("/delete")
-    @RequiresPermissions("sys:schedule:delete")
-    public R delete(@RequestBody String[] jobIds) {
-        scheduleJobService.deleteBatch(jobIds);
+    @RequiresPermissions("schedulejob:delete")
+    public R delete(@RequestBody String[] uids) {
+        scheduleJobService.deleteBatch(uids);
 
         return R.ok();
     }
 
-    /**
-     * 立即执行任务
-     */
-    @SysLog("立即执行任务")
-    @RequestMapping("/run")
-    @RequiresPermissions("sys:schedule:run")
-    public R run(@RequestBody String[] jobIds) {
-        scheduleJobService.run(jobIds);
-
-        return R.ok();
-    }
-
-    /**
-     * 暂停定时任务
-     */
-    @SysLog("暂停定时任务")
     @RequestMapping("/pause")
-    @RequiresPermissions("sys:schedule:pause")
+    @RequiresPermissions("schedulejob:info")
     public R pause(@RequestBody String[] jobIds) {
-        scheduleJobService.pause(jobIds);
-
-        return R.ok();
+        boolean ret = scheduleJobService.pause(jobIds);
+        if (ret) {
+            return R.ok();
+        } else {
+            return R.error("暂停出现异常");
+        }
     }
 
-    /**
-     * 恢复定时任务
-     */
-    @SysLog("恢复定时任务")
     @RequestMapping("/resume")
-    @RequiresPermissions("sys:schedule:resume")
+    @RequiresPermissions("schedulejob:info")
     public R resume(@RequestBody String[] jobIds) {
-        scheduleJobService.resume(jobIds);
+        boolean ret = scheduleJobService.resume(jobIds);
+        if (ret) {
+            return R.ok();
+        } else {
+            return R.error("恢复出现异常");
+        }
+    }
 
-        return R.ok();
+    @RequestMapping("/run")
+    @RequiresPermissions("schedulejob:info")
+    public R run(@RequestBody String[] jobIds) {
+        boolean ret = scheduleJobService.run(jobIds);
+        if (ret) {
+            return R.ok();
+        } else {
+            return R.error("运行出现异常");
+        }
     }
 
 }

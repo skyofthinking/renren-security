@@ -3,6 +3,7 @@ package io.renren.modules.sys.controller;
 
 import io.renren.common.annotation.SysLog;
 import io.renren.common.base.BaseController;
+import io.renren.common.utils.Constant;
 import io.renren.modules.sys.shiro.ShiroUtils;
 import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.common.utils.PageUtils;
@@ -132,8 +133,8 @@ public class SysUserController extends BaseController {
 	@SysLog("删除用户")
 	@RequestMapping("/delete")
 	@RequiresPermissions("sys:user:delete")
-	public R delete(@RequestBody Long[] userIds){
-		if(ArrayUtils.contains(userIds, 1L)){
+	public R delete(@RequestBody String[] userIds){
+		if(ArrayUtils.contains(userIds, Constant.SUPER_ADMIN)){
 			return R.error("系统管理员不能删除");
 		}
 		

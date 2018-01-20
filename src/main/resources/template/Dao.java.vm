@@ -2,6 +2,7 @@ package ${package}.dao;
 
 import ${package}.entity.${className}Entity;
 import org.apache.ibatis.annotations.Mapper;
+import io.renren.common.base.CrudDao;
 
 /**
  * ${comments}
@@ -11,6 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @date ${datetime}
  */
 @Mapper
-public interface ${className}Dao extends BaseDao<${className}Entity> {
-	
+public interface ${className}Dao extends CrudDao<${className}Entity> {
+
 }

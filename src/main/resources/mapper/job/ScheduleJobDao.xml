@@ -2,78 +2,79 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="io.renren.modules.job.dao.ScheduleJobDao">
-    <select id="queryObject" resultType="io.renren.modules.job.entity.ScheduleJobEntity">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.job.entity.ScheduleJobEntity" id="scheduleJobMap">
+        <result property="uid" column="uid"/>
+        <result property="jobGroup" column="job_group"/>
+        <result property="jobClass" column="job_class"/>
+        <result property="cronExpression" column="cron_expression"/>
+        <result property="description" column="description"/>
+        <result property="data" column="data"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="io.renren.modules.job.entity.ScheduleJobEntity">
 		select * from schedule_job where uid = #{value}
 	</select>
 
-    <select id="queryList" resultType="io.renren.modules.job.entity.ScheduleJobEntity">
-        select * from schedule_job
-        <where>
-            <if test="beanName != null and beanName.trim() != ''">
-                bean_name like concat('%', #{beanName}, '%')
-            </if>
-        </where>
-    </select>
-
-    <select id="queryTotal" resultType="int">
-        select count(1) from schedule_job
-        <where>
-            <if test="beanName != null and beanName.trim() != ''">
-                bean_name like concat('%', #{beanName}, '%')
-            </if>
-        </where>
-    </select>
-
-    <insert id="insert" parameterType="io.renren.modules.job.entity.ScheduleJobEntity">
+	<select id="queryList" resultType="io.renren.modules.job.entity.ScheduleJobEntity">
+		select * from schedule_job
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by uid desc
+			</otherwise>
+        </choose>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from schedule_job 
+	</select>
+	 
+	<insert id="insert" parameterType="io.renren.modules.job.entity.ScheduleJobEntity">
 		insert into schedule_job
 		(
-		    uid,
-			bean_name, 
-			method_name, 
-			params, 
+			uid, 
+			job_group, 
+			job_class, 
 			cron_expression, 
-			status, 
-			remark, 
-			create_time
+			description, 
+			data
 		)
 		values
 		(
-		    #{uid},
-			#{beanName}, 
-			#{methodName}, 
-			#{params}, 
+			#{uid}, 
+			#{jobGroup}, 
+			#{jobClass}, 
 			#{cronExpression}, 
-			#{status}, 
-			#{remark}, 
-			#{createTime}
+			#{description}, 
+			#{data}
 		)
 	</insert>
+	 
+	<update id="update" parameterType="io.renren.modules.job.entity.ScheduleJobEntity">
+		update schedule_job 
+		<set>
+			<if test="jobGroup != null">job_group = #{jobGroup}, </if>
+			<if test="jobClass != null">job_class = #{jobClass}, </if>
+			<if test="cronExpression != null">cron_expression = #{cronExpression}, </if>
+			<if test="description != null">description = #{description}, </if>
+			<if test="data != null">data = #{data}</if>
+		</set>
+		where uid = #{uid}
+	</update>
+	
+	<delete id="delete">
+		delete from schedule_job where uid = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from schedule_job where uid in 
+		<foreach item="uid" collection="array" open="(" separator="," close=")">
+			#{uid}
+		</foreach>
+	</delete>
 
-    <update id="update" parameterType="io.renren.modules.job.entity.ScheduleJobEntity">
-        update schedule_job
-        <set>
-            <if test="beanName != null">bean_name = #{beanName},</if>
-            <if test="methodName != null">method_name = #{methodName},</if>
-            <if test="params != null">params = #{params},</if>
-            <if test="cronExpression != null">cron_expression = #{cronExpression},</if>
-            <if test="status != null">status = #{status},</if>
-            <if test="remark != null">remark = #{remark},</if>
-        </set>
-        where uid = #{uid}
-    </update>
-
-    <!-- 批量更新状态 -->
-    <update id="updateBatch">
-        update schedule_job set status = #{status} where uid in
-        <foreach item="jobId" collection="list" open="(" separator="," close=")">
-            #{jobId}
-        </foreach>
-    </update>
-
-    <delete id="deleteBatch">
-        delete from schedule_job where uid in
-        <foreach item="jobId" collection="array" open="(" separator="," close=")">
-            #{jobId}
-        </foreach>
-    </delete>
 </mapper>

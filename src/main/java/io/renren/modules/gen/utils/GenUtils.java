@@ -3,6 +3,7 @@ package io.renren.modules.gen.utils;
 
 import io.renren.common.exception.RRException;
 import io.renren.common.utils.DateUtils;
+import io.renren.common.utils.IdGen;
 import io.renren.modules.gen.entity.ColumnEntity;
 import io.renren.modules.gen.entity.TableEntity;
 import org.apache.commons.configuration.Configuration;
@@ -37,7 +38,6 @@ public class GenUtils {
         templates.add("template/Dao.java.vm");
         templates.add("template/Dao.xml.vm");
         templates.add("template/Service.java.vm");
-        templates.add("template/ServiceImpl.java.vm");
         templates.add("template/Controller.java.vm");
         templates.add("template/list.html.vm");
         templates.add("template/list.js.vm");
@@ -112,6 +112,18 @@ public class GenUtils {
         map.put("author", config.getString("author"));
         map.put("email", config.getString("email"));
         map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
+
+        // SQL
+        map.put("menu_id", IdGen.uuid());
+        map.put("menu_id_list", IdGen.uuid());
+        map.put("menu_id_insert", IdGen.uuid());
+        map.put("menu_id_update", IdGen.uuid());
+        map.put("menu_id_delete", IdGen.uuid());
+
+        String packageName = config.getString("package");
+        String lastDir= packageName.substring(packageName.lastIndexOf(".") + 1);
+        map.put("lastDir", lastDir);
+
         VelocityContext context = new VelocityContext(map);
 
         //获取模板列表
@@ -124,7 +136,7 @@ public class GenUtils {
 
             try {
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package"))));
+                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), packageName)));
                 IOUtils.write(sw.toString(), zip, "UTF-8");
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
@@ -168,6 +180,8 @@ public class GenUtils {
      */
     public static String getFileName(String template, String className, String packageName) {
         String packagePath = "main" + File.separator + "java" + File.separator;
+        String resourcesPath = "main" + File.separator + "resources" + File.separator;
+        String lastDir= packageName.substring(packageName.lastIndexOf(".") + 1);
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator;
         }
@@ -181,15 +195,12 @@ public class GenUtils {
         }
 
         if (template.contains("Dao.xml.vm")) {
-            return packagePath + "dao" + File.separator + className + "Dao.xml";
+            // return packagePath + "dao" + File.separator + className + "Dao.xml";
+            return resourcesPath + "mapper" + File.separator + lastDir + File.separator + className + "Dao.xml";
         }
 
         if (template.contains("Service.java.vm")) {
             return packagePath + "service" + File.separator + className + "Service.java";
-        }
-
-        if (template.contains("ServiceImpl.java.vm")) {
-            return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
         }
 
         if (template.contains("Controller.java.vm")) {
@@ -198,11 +209,11 @@ public class GenUtils {
 
         if (template.contains("list.html.vm")) {
             return "main" + File.separator + "webapp" + File.separator + "WEB-INF" + File.separator + "views"
-                    + File.separator + "modules" + File.separator + "generator" + File.separator + className.toLowerCase() + ".html";
+                    + File.separator + "modules" + File.separator + lastDir + File.separator + className.toLowerCase() + ".html";
         }
 
         if (template.contains("list.js.vm")) {
-            return "main" + File.separator + "webapp" + File.separator + "statics" + File.separator + "js" + File.separator + "modules" + File.separator + "generator" + File.separator + className.toLowerCase() + ".js";
+            return "main" + File.separator + "webapp" + File.separator + "statics" + File.separator + "js" + File.separator + "modules" + File.separator + lastDir + File.separator + className.toLowerCase() + ".js";
         }
 
         if (template.contains("menu.sql.vm")) {

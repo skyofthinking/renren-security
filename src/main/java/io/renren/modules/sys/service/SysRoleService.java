@@ -53,15 +53,13 @@ public class SysRoleService extends CrudService<SysRoleDao, SysRoleEntity> {
 
     @Override
     @Transactional
-    public int update(SysRoleEntity role) {
-        int count = dao.update(role);
+    public void update(SysRoleEntity role) {
+        dao.update(role);
 
         //更新角色与菜单关系
         sysRoleMenuService.saveOrUpdate(role.getRoleId(), role.getMenuIdList());
 
         //保存角色与部门关系
         sysRoleDeptService.saveOrUpdate(role.getRoleId(), role.getDeptIdList());
-
-        return count;
     }
 }
