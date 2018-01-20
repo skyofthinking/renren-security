@@ -20,7 +20,7 @@ public class RedisTest {
 
     @Test
     public void test(){
-        SysUserEntity user = sysUserService.queryObject(1L);
+        SysUserEntity user = sysUserService.queryObject("1");
         System.out.println(ToStringBuilder.reflectionToString(user));
 
         redisUtils.set("user", user);
