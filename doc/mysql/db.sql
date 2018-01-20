@@ -237,7 +237,7 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 LOCK TABLES `qrtz_scheduler_state` WRITE;
 /*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
-INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler','WIN-017122716491516334952975',1516337299613,15000),('schedulerFactoryBean','WIN-017122716491516437864332',1516438693266,20000);
+INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler','WIN-017122716491516334952975',1516337299613,15000),('schedulerFactoryBean','WIN-017122716491516437864332',1516439353306,20000);
 /*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,12 +364,12 @@ DROP TABLE IF EXISTS `schedule_job`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule_job` (
-  `uid` varchar(64) COLLATE utf8_bin NOT NULL,
+  `uid` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '编号',
   `job_group` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '任务组',
   `job_class` varchar(500) COLLATE utf8_bin DEFAULT NULL COMMENT '定时任务类',
   `cron_expression` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT 'Cron表达式',
   `description` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '描述',
-  `data` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
+  `data` varchar(1000) COLLATE utf8_bin DEFAULT NULL COMMENT '数据',
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='定时任务';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -701,4 +701,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-20 16:58:32
+-- Dump completed on 2018-01-20 17:09:19
