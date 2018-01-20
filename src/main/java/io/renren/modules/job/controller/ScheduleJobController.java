@@ -104,8 +104,8 @@ public class ScheduleJobController extends BaseController {
 
     @RequestMapping("/pause")
     @RequiresPermissions("schedulejob:info")
-    public R pause(@RequestBody String[] jobIds) {
-        boolean ret = scheduleJobService.pause(jobIds);
+    public R pause(@RequestBody String[] uids) {
+        boolean ret = scheduleJobService.pause(uids);
         if (ret) {
             return R.ok();
         } else {
@@ -115,8 +115,8 @@ public class ScheduleJobController extends BaseController {
 
     @RequestMapping("/resume")
     @RequiresPermissions("schedulejob:info")
-    public R resume(@RequestBody String[] jobIds) {
-        boolean ret = scheduleJobService.resume(jobIds);
+    public R resume(@RequestBody String[] uids) {
+        boolean ret = scheduleJobService.resume(uids);
         if (ret) {
             return R.ok();
         } else {
@@ -126,8 +126,8 @@ public class ScheduleJobController extends BaseController {
 
     @RequestMapping("/run")
     @RequiresPermissions("schedulejob:info")
-    public R run(@RequestBody String[] jobIds) {
-        boolean ret = scheduleJobService.run(jobIds);
+    public R run(@RequestBody String[] uids) {
+        boolean ret = scheduleJobService.run(uids);
         if (ret) {
             return R.ok();
         } else {

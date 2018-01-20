@@ -118,8 +118,8 @@ var vm = new Vue({
             });
         },
         pause: function (event) {
-            var jobIds = getSelectedRows();
-            if(jobIds == null){
+            var uids = getSelectedRows();
+            if(uids == null){
                 return ;
             }
 
@@ -128,7 +128,7 @@ var vm = new Vue({
                     type: "POST",
                     url: baseURL + "schedulejob/pause",
                     contentType: "application/json",
-                    data: JSON.stringify(jobIds),
+                    data: JSON.stringify(uids),
                     success: function(r){
                         if(r.code == 0){
                             alert('操作成功', function(index){
@@ -142,8 +142,8 @@ var vm = new Vue({
             });
         },
         resume: function (event) {
-            var jobIds = getSelectedRows();
-            if(jobIds == null){
+            var uids = getSelectedRows();
+            if(uids == null){
                 return ;
             }
 
@@ -152,7 +152,7 @@ var vm = new Vue({
                     type: "POST",
                     url: baseURL + "schedulejob/resume",
                     contentType: "application/json",
-                    data: JSON.stringify(jobIds),
+                    data: JSON.stringify(uids),
                     success: function(r){
                         if(r.code == 0){
                             alert('操作成功', function(index){
@@ -166,8 +166,8 @@ var vm = new Vue({
             });
         },
         runOnce: function (event) {
-            var jobIds = getSelectedRows();
-            if(jobIds == null){
+            var uids = getSelectedRows();
+            if(uids == null){
                 return ;
             }
 
@@ -176,7 +176,7 @@ var vm = new Vue({
                     type: "POST",
                     url: baseURL + "schedulejob/run",
                     contentType: "application/json",
-                    data: JSON.stringify(jobIds),
+                    data: JSON.stringify(uids),
                     success: function(r){
                         if(r.code == 0){
                             alert('操作成功', function(index){
