@@ -22,6 +22,7 @@ public class SysPageController extends BaseController {
 
 	@RequestMapping("{url}.html")
 	public String url(@PathVariable("url") String url){
+		logger.info("URL " + url);
 		return url;
 	}
 

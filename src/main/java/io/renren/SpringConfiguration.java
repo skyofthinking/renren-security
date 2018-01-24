@@ -25,8 +25,7 @@ public class SpringConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        configurer.ignoreAcceptHeader(true).defaultContentType(
-                MediaType.APPLICATION_JSON_UTF8);
+        configurer.ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON_UTF8);
     }
 
     /**
