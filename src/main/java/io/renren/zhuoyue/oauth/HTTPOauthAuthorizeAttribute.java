@@ -32,10 +32,10 @@ public class HTTPOauthAuthorizeAttribute implements Filter {
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String auth = httpRequest.getHeader("Authorization");
-        if ((auth != null) && (auth.length() > 6)) {
-            String HeadStr = auth.substring(0, 5).toLowerCase();
-            if (HeadStr.compareTo("oauth") == 0) {
-                auth = auth.substring(6, auth.length());
+        if ((auth != null) && (auth.length() > 7)) {
+            String HeadStr = auth.substring(0, 6).toLowerCase();
+            if (HeadStr.compareTo("bearer") == 0) {
+                auth = auth.substring(7, auth.length());
                 if (JwtHelper.parseJWT(auth, audience.getBase64Secret()) != null) {
                     chain.doFilter(request, response);
                     return;

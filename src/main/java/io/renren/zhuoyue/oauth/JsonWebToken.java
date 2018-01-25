@@ -50,7 +50,7 @@ public class JsonWebToken {
             AccessToken accessTokenEntity = new AccessToken();
             accessTokenEntity.setAccessToken(accessToken);
             accessTokenEntity.setExpiresIn(audience.getExpiresSecond());
-            accessTokenEntity.setTokenType("oauth");
+            accessTokenEntity.setTokenType("bearer");
 
             // 放到Header返回
 
