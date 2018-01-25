@@ -62,7 +62,9 @@ public class ShiroConfig {
         Map<String, String> filterMap = new LinkedHashMap<>();
         filterMap.put("/statics/**", "anon");
         filterMap.put("/swagger/**", "anon");
-        filterMap.put("/v2/**", "anon");
+        filterMap.put("/v2/**", "anon"); // swagger
+        filterMap.put("/rapi/**", "anon"); // rest api
+        filterMap.put("/oauth/**", "anon"); // oauth
         filterMap.put("/login.html", "anon");
         filterMap.put("/sys/login", "anon");
         filterMap.put("/favicon.ico", "anon");

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/demo")
+@RequestMapping(value = "/rapi/demo")
 public class DemoController {
 
     private Logger logger = LoggerFactory.getLogger(DemoController.class);
