@@ -26,6 +26,6 @@ public class RedisTest {
         redisUtils.set("user", user);
 
         user = redisUtils.get("user", SysUserEntity.class);
-        System.out.println(ToStringBuilder.reflectionToString(user));
+        System.out.println("redis test user " + ToStringBuilder.reflectionToString(user));
     }
 }

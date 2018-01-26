@@ -1,21 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <include resource="org/springframework/boot/logging/logback/base.xml" />
-    <logger name="org.springframework.web" level="INFO"/>
-    <logger name="org.springboot.sample" level="TRACE" />
+<!-- 从高到地低OFF 、 FATAL 、 ERROR 、 WARN 、 INFO 、 DEBUG 、 TRACE 、 ALL -->
+<!-- 日志输出规则: 根据当前ROOT级别，日志输出时，级别高于root默认的级别时,则会输出 -->
+<!-- 每个配置的filter是过滤掉输出文件里面，会出现高级别文件，依然出现低级别的日志信息，通过filter过滤只记录本级别的日志-->
 
-    <!-- 开发、测试环境 -->
-    <springProfile name="dev,test">
-        <logger name="org.springframework.web" level="INFO"/>
-        <logger name="org.springboot.sample" level="INFO" />
-        <logger name="io.renren" level="DEBUG" />
-    </springProfile>
+<!-- 属性描述 scan：性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true
+    scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
+    debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
+-->
+<!-- 常用的Pattern变量,大家可打开该pattern进行输出观察 -->
+<!--
+  <pattern>
+      %d{yyyy-MM-dd HH:mm:ss} [%level] - %msg%n
+      Logger: %logger
+      Class: %class
+      File: %file
+      Caller: %caller
+      Line: %line
+      Message: %m
+      Method: %M
+      Relative: %relative
+      Thread: %thread
+      Exception: %ex
+      xException: %xEx
+      nopException: %nopex
+      rException: %rEx
+      Marker: %marker
+      %n
+  </pattern>
+-->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!-- 定义日志名称 -->
+    <contextName>framework</contextName>
 
-    <!-- 生产环境 -->
-    <springProfile name="pro">
-        <logger name="org.springframework.web" level="ERROR"/>
-        <logger name="org.springboot.sample" level="ERROR" />
-        <logger name="io.renren" level="ERROR" />
-    </springProfile>
+    <!-- 定义日志文件 输入位置 -->
+    <!-- 建议不要在LogBack的配置中使用相对路径 -->
+    <property name="logDir" value="./logs"/>
+    <!-- 日志文件名称 -->
+    <property name="logName" value="logback"/>
+    <!-- 日志最大存档数码 -->
+    <property name="maxIndex" value="5"/>
+    <!-- 日志最大大小 -->
+    <property name="fileSize" value="30MB"/>
 
+    <!-- ConsoleAppender 控制台输出日志 -->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- 对日志进行格式化 -->
+        <!-- encoder默认配置为PartternLayoutEncoder -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!-- 格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <charset>UTF-8</charset><!-- 此处设置字符集 -->
+        </encoder>
+    </appender>
+
+    <!--根据日志级别分离日志，分别输出到不同的文件-->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <!--日志文件输出的文件名-->
+        <file>${logDir}/${logName}.info.log</file>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <charset>UTF-8</charset><!-- 此处设置字符集 -->
+        </encoder>
+
+        <!-- 按照固定窗口模式生成日志文件，当文件大于30MB时，生成新的日志文件。窗口大小是1到5，当保存了5个归档文件后，将覆盖最早的日志。-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${logDir}/${logName}.info.%i.log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${maxIndex}</maxIndex>
+        </rollingPolicy>
+
+        <!-- 查看当前活动文件的大小，如果超过指定大小会告知RollingFileAppender 触发当前活动文件滚动 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>${fileSize}</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
+            <level>ERROR</level>
+            <!-- 匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!--日志文件输出的文件名-->
+        <file>${logDir}/${logName}.error.log</file>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <charset>UTF-8</charset><!-- 此处设置字符集 -->
+        </encoder>
+
+        <!-- 按照固定窗口模式生成日志文件，当文件大于30MB时，生成新的日志文件。窗口大小是1到5，当保存了5个归档文件后，将覆盖最早的日志。-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${logDir}/${logName}.error.%i.log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${maxIndex}</maxIndex>
+        </rollingPolicy>
+
+        <!-- 查看当前活动文件的大小，如果超过指定大小会告知RollingFileAppender 触发当前活动文件滚动 -->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>${fileSize}</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- sql level -->
+    <logger name="java.sql" level="WARN"/>
+    <logger name="org.apache.ibatis" level="WARN"/>
+    <logger name="org.mybatis" level="WARN"/>
+    <!-- Springframework level -->
+    <logger name="org.springframework" level="WARN"/>
+    <!-- cache level -->
+    <logger name="sf.ehcache.store" level="ERROR"/>
+    <logger name="hibernate.validator.internal" level="ERROR"/>
+    <!-- security level -->
+    <logger name="org.activiti.engine.impl.persistence" level="WARN"/>
+    <logger name="org.apache.shiro" level="WARN"/>
+    <!-- Project default level -->
+    <logger name="io.renren" level="DEBUG"/>
+
+    <!-- root级别 -->
+    <root level="info">
+        <appender-ref ref="consoleLog" />
+        <appender-ref ref="fileInfoLog" />
+        <appender-ref ref="fileErrorLog" />
+    </root>
 </configuration>
