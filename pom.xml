@@ -40,6 +40,7 @@
 
         <commons-pool2.version>2.4.3</commons-pool2.version>
         <slf4j.version>1.7.7</slf4j.version>
+        <hutool.version>4.0.4</hutool.version>
 
         <!--wagon plugin 配置-->
         <service-path>/work/renren</service-path>
@@ -79,6 +80,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- rabbitMQ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
         <!-- Config -->
@@ -241,6 +248,13 @@
             <groupId>com.github.axet</groupId>
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
+        </dependency>
+
+        <!-- Tools -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
 
         <!-- Log -->

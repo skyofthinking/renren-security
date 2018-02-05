@@ -1,0 +1,1 @@
+- [Docker环境下的RabbitMQ部署，Spring AMQP使用](https://www.jianshu.com/p/c40166cb4e86)
