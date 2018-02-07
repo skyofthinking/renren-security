@@ -11,6 +11,8 @@ public class ResourcesConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/statics/**").addResourceLocations("classpath:/statics/");
         registry.addResourceHandler("/swagger/**").addResourceLocations("classpath:/swagger/");
+        registry.addResourceHandler("/templates/**").addResourceLocations("classpath:/templates/");
+        super.addResourceHandlers(registry);
     }
 
 }

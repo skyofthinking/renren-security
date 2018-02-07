@@ -41,6 +41,7 @@
         <commons-pool2.version>2.4.3</commons-pool2.version>
         <slf4j.version>1.7.7</slf4j.version>
         <hutool.version>4.0.4</hutool.version>
+        <activiti.version>6.0.0</activiti.version>
 
         <!--wagon plugin 配置-->
         <service-path>/work/renren</service-path>
@@ -148,6 +149,13 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>RELEASE</version>
+        </dependency>
+
+        <!-- Activiti -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter-basic</artifactId>
+            <version>${activiti.version}</version>
         </dependency>
 
         <!-- Tomcat -->

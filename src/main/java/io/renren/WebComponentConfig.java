@@ -11,8 +11,8 @@ import java.util.List;
 @Configuration
 public class WebComponentConfig {
 
-
     // 注册Filter
+    // JWT Token
     @Bean
     public FilterRegistrationBean jwtFilterRegistrationBean() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
