@@ -152,11 +152,13 @@
         </dependency>
 
         <!-- Activiti -->
+        <!--
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-spring-boot-starter-basic</artifactId>
             <version>${activiti.version}</version>
         </dependency>
+        -->
 
         <!-- Tomcat -->
         <dependency>

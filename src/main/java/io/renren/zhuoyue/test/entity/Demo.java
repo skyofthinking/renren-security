@@ -1,4 +1,4 @@
-package io.renren.zhuoyue.test;
+package io.renren.zhuoyue.test.entity;
 
 public class Demo {
 

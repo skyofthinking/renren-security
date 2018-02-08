@@ -16,7 +16,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @ComponentScan
 @EnableScheduling // 启用定时任务
-
 public class RenrenApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
@@ -27,7 +26,5 @@ public class RenrenApplication extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(RenrenApplication.class);
     }
-
-
 
 }

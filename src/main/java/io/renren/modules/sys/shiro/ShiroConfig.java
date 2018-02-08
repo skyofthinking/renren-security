@@ -64,7 +64,7 @@ public class ShiroConfig {
 
         filterMap.put("/swagger/**", "anon"); // swagger
         filterMap.put("/v2/**", "anon"); // swagger
-        filterMap.put("/rapi/**", "anon"); // rest api
+        filterMap.put("/rest/**", "anon"); // rest api
         filterMap.put("/oauth/**", "anon"); // oauth
         filterMap.put("/test/**", "anon"); // test
 

@@ -19,7 +19,7 @@ public class WebComponentConfig {
         HTTPOauthAuthorizeAttribute httpOauthAuthorizeAttribute = new HTTPOauthAuthorizeAttribute();
         registrationBean.setFilter(httpOauthAuthorizeAttribute);
         List<String> urlPatterns = new ArrayList<String>();
-        urlPatterns.add("/rapi/*");
+        urlPatterns.add("/rest/*");
         registrationBean.setUrlPatterns(urlPatterns);
         registrationBean.setOrder(3);
         return registrationBean;
