@@ -1,4 +1,4 @@
-package com.zhuoyue.common;
+package io.renren.zhuoyue.common;
 
 // 生成唯一ID
 // Twitter的分布式自增ID算法Snowflake实现

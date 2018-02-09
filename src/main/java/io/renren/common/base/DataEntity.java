@@ -2,9 +2,11 @@ package io.renren.common.base;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.renren.common.utils.Constant;
 import io.renren.common.utils.IdGen;
 import io.renren.common.utils.UserUtils;
 import io.renren.modules.sys.entity.SysUserEntity;
+import io.renren.zhuoyue.common.IdWorker;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
@@ -34,7 +36,8 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
     public void preInsert() {
         // 不限制ID为UUID，调用setIsNewRecord()使用自定义ID
         if (!this.isNewRecord) {
-            String uuid = IdGen.uuid();
+            IdWorker idWorker = new IdWorker(Constant.WORKER_ID);
+            String uuid = String.valueOf(idWorker.nextId()); // IdGen.uuid();
             setUid(uuid);
         }
         SysUserEntity user = UserUtils.getUser();

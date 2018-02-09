@@ -17,6 +17,8 @@ public class Constant {
 
     public static final String ROOT_ID = "0";
 
+    public static final long WORKER_ID = 2;
+
     /**
      * 菜单类型
      *
