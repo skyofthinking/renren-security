@@ -42,7 +42,7 @@ public class Query extends LinkedHashMap<String, Object> {
 
 
         //防止SQL注入（因为sidx、order是通过拼接SQL实现排序的，会有SQL注入风险）
-        if (!ObjectUtils.isEmpty(params.get("page"))) {
+        if (!ObjectUtils.isEmpty(params.get("sidx"))) {
             String sidx = params.get("sidx").toString();
             this.put("sidx", SQLFilter.sqlInject(sidx));
         }

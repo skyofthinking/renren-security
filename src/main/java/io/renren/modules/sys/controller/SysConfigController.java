@@ -44,7 +44,11 @@ public class SysConfigController extends BaseController {
 
         PageUtils pageUtils = new PageUtils(sysConfigList, total, query.getLimit(), query.getPage());
 
-        return R.ok().put("page", pageUtils);
+        R r = R.ok();
+        r.put("count", total);
+        r.put("data", sysConfigList);
+
+        return r;
     }
 
     /**

@@ -1,55 +1,42 @@
 $(function () {
-    $("#jqGrid").jqGrid({
-        url: baseURL + 'sys/config/list',
-        datatype: "json",
-        colModel: [
-            {label: 'ID', name: 'uid', width: 30, key: true, hidden: true},
-            {label: '参数名', name: 'keyword', width: 60},
-            {label: '参数值', name: 'value', width: 100},
-            {label: '备注', name: 'remarks', width: 80}
-        ],
-        viewrecords: true,
-        height: 385,
-        rowNum: 10,
-        rowList: [10, 30, 50],
-        rownumbers: true,
-        rownumWidth: 25,
-        autowidth: true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader: {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames: {
-            page: "page",
-            rows: "limit",
-            order: "order"
-        },
-        gridComplete: function () {
-            //隐藏grid底部滚动条
-            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
-        }
-    });
-
-});
-
-layui.use('table', function(){
-    var table = layui.table;
-
-    table.render({
-        elem: '#test'
-        ,url:baseURL + 'sys/config/list'
-        ,where: {sidx: '', order: ''}
-        ,response: {countName: 'totalCount', dataName: 'list'}
-        ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-        ,cols: [[
-            {field:'uid', width:80, title: 'ID', sort: true}
-            ,{field:'keyword', width:80, title: '参数名'}
-            ,{field:'value', width:80, title: '参数值'}
-        ]]
+    layui.use('table', function () {
+        var table = layui.table, $ = layui.jquery;
+        var opt = {
+            elem: '#table'
+            , url: baseURL + 'sys/config/list'
+            , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , height: 410
+            , page: true //开启分页,
+            , limit: 10
+            , limits: [5, 10, 20, 50]
+            , cols: [[
+                {type: 'checkbox'}
+                , {field: 'uid', width: 80, title: 'ID', sort: true}
+                , {field: 'keyword', width: 80, title: '参数名'}
+                , {field: 'value', width: 80, title: '参数值'}
+            ]],
+            request: {
+                pageName: 'page', //页码的参数名称，默认：page
+                limitName: 'limit' //每页数据量的参数名，默认：limit
+            },
+            response: {
+                countName: 'count', //数据总数的字段名称，默认：count
+                dataName: 'data' //数据列表的字段名称，默认：data
+            }
+        };
+        var tableIns = table.render(opt);
+        table.on('sort(table)', function (obj) {
+            debugger;
+            tableIns.reload({
+                initSort: obj,
+                where: {
+                    sortName: obj.field,
+                    sortOrder: obj.type,
+                    pageName: 'page', //页码的参数名称，默认：page
+                    limitName: 'limit' //每页数据量的参数名，默认：limit
+                }
+            })
+        });
     });
 });
 

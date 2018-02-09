@@ -7,21 +7,37 @@
 <body>
 <div id="rrapp" v-cloak>
     <div v-show="showList">
-        <div class="grid-btn">
-            <div class="form-group col-sm-2">
-                <input type="text" class="form-control" v-model="q.keyword" @keyup.enter="query" placeholder="参数名">
+        <div class="animated fadeIn" >
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-align-justify"></i> 参数列表
+                        </div>
+                        <div class="card-body">
+                            <div class=" form-horizontal">
+                                <div class="form-group row">
+                                    <div class="col-md-3">
+                                        <div class="input-group">
+                                            <span class="input-group-addon search-content">参数名</span>
+                                            <input type="text" v-model="q.keyword" @keyup.enter="query" class="form-control search-content"/>
+                                        </div>
+                                    </div>
+                                    <a class="btn btn-default" @click="query">查询</a>
+
+                                    <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+                                    <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+                                    <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+                                </div>
+                                <table class="layui-table table-responsive-sm" id="table" lay-filter="table"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+                </div>
             </div>
-            <a class="btn btn-default" @click="query">查询</a>
-
-            <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-            <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
         </div>
-        <table id="jqGrid"></table>
-        <div id="jqGridPager"></div>
     </div>
-
-    <!--<table class="layui-hide" id="test"></table>-->
 
     <div v-show="!showList" class="panel panel-default">
         <div class="panel-heading">{{title}}</div>
