@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import io.renren.common.utils.Query;
 import io.renren.common.utils.UserUtils;
 import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.sys.dao.SysMenuDao;
@@ -51,7 +52,7 @@ public class UserRealm extends AuthorizingRealm {
 
         //系统管理员，拥有最高权限
         if (UserUtils.isAdmin(userId)) {
-            List<SysMenuEntity> menuList = sysMenuDao.queryList(new HashMap<String, Object>());
+            List<SysMenuEntity> menuList = sysMenuDao.queryList(new Query());
             permsList = new ArrayList<>(menuList.size());
             for (SysMenuEntity menu : menuList) {
                 permsList.add(menu.getPerms());

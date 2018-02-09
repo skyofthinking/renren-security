@@ -2,6 +2,7 @@ package io.renren.modules.sys.controller;
 
 import io.renren.common.base.BaseController;
 import io.renren.common.utils.Constant;
+import io.renren.common.utils.Query;
 import io.renren.common.utils.R;
 import io.renren.common.utils.UserUtils;
 import io.renren.modules.sys.entity.SysDeptEntity;
@@ -36,7 +37,7 @@ public class SysDeptController extends BaseController {
     @RequestMapping("/list")
     @RequiresPermissions("sys:dept:list")
     public List<SysDeptEntity> list() {
-        List<SysDeptEntity> deptList = sysDeptService.queryList(new HashMap<String, Object>());
+        List<SysDeptEntity> deptList = sysDeptService.queryList(new Query());
 
         return deptList;
     }
@@ -47,7 +48,7 @@ public class SysDeptController extends BaseController {
     @RequestMapping("/select")
     @RequiresPermissions("sys:dept:select")
     public R select() {
-        List<SysDeptEntity> deptList = sysDeptService.queryList(new HashMap<String, Object>());
+        List<SysDeptEntity> deptList = sysDeptService.queryList(new Query());
 
         //添加一级部门
         if (UserUtils.isAdmin(getUserId())) {

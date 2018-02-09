@@ -4,6 +4,7 @@ import io.renren.common.annotation.SysLog;
 import io.renren.common.base.BaseController;
 import io.renren.common.exception.RRException;
 import io.renren.common.utils.Constant;
+import io.renren.common.utils.Query;
 import io.renren.common.utils.R;
 import io.renren.modules.sys.entity.SysMenuEntity;
 import io.renren.modules.sys.service.SysMenuService;
@@ -46,7 +47,7 @@ public class SysMenuController extends BaseController {
     @RequestMapping("/list")
     @RequiresPermissions("sys:menu:list")
     public List<SysMenuEntity> list() {
-        List<SysMenuEntity> menuList = sysMenuService.queryList(new HashMap<String, Object>());
+        List<SysMenuEntity> menuList = sysMenuService.queryList(new Query());
 
         return menuList;
     }

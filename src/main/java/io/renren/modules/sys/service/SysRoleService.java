@@ -2,6 +2,7 @@ package io.renren.modules.sys.service;
 
 import io.renren.common.annotation.DataFilter;
 import io.renren.common.base.CrudService;
+import io.renren.common.utils.Query;
 import io.renren.modules.sys.dao.SysRoleDao;
 import io.renren.modules.sys.entity.SysRoleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,14 @@ public class SysRoleService extends CrudService<SysRoleDao, SysRoleEntity> {
     private SysRoleDeptService sysRoleDeptService;
 
     @DataFilter(tableAlias = "r", user = false)
-    public List<SysRoleEntity> queryList(Map<String, Object> map) {
-        return dao.queryList(map);
+    public List<SysRoleEntity> queryList(Query query) {
+        return dao.queryList(query);
     }
 
     @Override
     @DataFilter(tableAlias = "r", user = false)
-    public int queryTotal(Map<String, Object> map) {
-        return dao.queryTotal(map);
+    public int queryTotal(Query query) {
+        return dao.queryTotal(query);
     }
 
     @Override

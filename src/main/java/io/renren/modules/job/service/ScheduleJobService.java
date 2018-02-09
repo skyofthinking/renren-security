@@ -35,8 +35,8 @@ public class ScheduleJobService extends CrudService<ScheduleJobDao, ScheduleJobE
     @Qualifier("schedulerFactoryBean")
     private SchedulerFactoryBean schedulerFactoryBean;
 
-    public List<ScheduleJobEntity> queryList(Map<String, Object> map) {
-        List<ScheduleJobEntity> scheduleJobEntityList = dao.queryList(map);
+    public List<ScheduleJobEntity> queryList(Query query) {
+        List<ScheduleJobEntity> scheduleJobEntityList = dao.queryList(query);
         Scheduler scheduler = schedulerFactoryBean.getScheduler();
         for (ScheduleJobEntity mScheduleJobEntity : scheduleJobEntityList) {
             JobDynamicScheduler.fillScheduleJobEntity(scheduler, mScheduleJobEntity);

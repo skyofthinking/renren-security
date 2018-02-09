@@ -3,6 +3,7 @@ package io.renren.modules.sys.service;
 import com.qiniu.util.StringUtils;
 import io.renren.common.annotation.DataFilter;
 import io.renren.common.base.CrudService;
+import io.renren.common.utils.Query;
 import io.renren.modules.sys.dao.SysConfigDao;
 import io.renren.modules.sys.dao.SysDeptDao;
 import io.renren.modules.sys.entity.SysConfigEntity;
@@ -24,8 +25,8 @@ import java.util.Map;
 public class SysDeptService extends CrudService<SysDeptDao, SysDeptEntity> {
 
     @DataFilter(tableAlias = "d", user = false)
-    public List<SysDeptEntity> queryList(Map<String, Object> map) {
-        return dao.queryList(map);
+    public List<SysDeptEntity> queryList(Query query) {
+        return dao.queryList(query);
     }
 
     /**

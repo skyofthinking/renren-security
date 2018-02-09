@@ -1,5 +1,7 @@
 package io.renren.common.base;
 
+import io.renren.common.utils.Query;
+
 import java.util.List;
 import java.util.Map;
 
@@ -26,11 +28,9 @@ public interface CrudDao<T> extends BaseDao {
 
     public T queryObject(String id);
 
-    public List<T> queryList(Map<String, Object> map);
+    public List<T> queryList(Query query);
 
-    public List<T> queryList(String id);
-
-    public int queryTotal(Map<String, Object> map);
+    public int queryTotal(Query query);
 
     public int queryTotal();
 

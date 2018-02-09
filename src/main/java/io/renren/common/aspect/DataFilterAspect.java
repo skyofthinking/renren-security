@@ -2,6 +2,7 @@ package io.renren.common.aspect;
 
 
 import io.renren.common.annotation.DataFilter;
+import io.renren.common.utils.Query;
 import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.common.exception.RRException;
 import io.renren.common.utils.Constant;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 /**
  * 数据过滤，切面处理类
+ *
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2017/9/17 15:02
@@ -38,16 +40,16 @@ public class DataFilterAspect {
     @Before("dataFilterCut()")
     public void dataFilter(JoinPoint point) throws Throwable {
         Object params = point.getArgs()[0];
-        if(params != null && params instanceof Map){
+        if (params != null && params instanceof Map) {
             SysUserEntity user = ShiroUtils.getUserEntity();
 
             //如果不是超级管理员，则只能查询本部门及子部门数据
-            if(user.getUserId() != Constant.SUPER_ADMIN){
-                Map map = (Map)params;
+            if (user.getUserId() != Constant.SUPER_ADMIN) {
+                Query map = (Query) params;
                 map.put("filterSql", getFilterSQL(user, point));
             }
 
-            return ;
+            return;
         }
 
         throw new RRException("要实现数据权限接口的参数，只能是Map类型，且不能为NULL");
@@ -56,13 +58,13 @@ public class DataFilterAspect {
     /**
      * 获取数据过滤的SQL
      */
-    private String getFilterSQL(SysUserEntity user, JoinPoint point){
+    private String getFilterSQL(SysUserEntity user, JoinPoint point) {
         MethodSignature signature = (MethodSignature) point.getSignature();
         DataFilter dataFilter = signature.getMethod().getAnnotation(DataFilter.class);
         //获取表的别名
         String tableAlias = dataFilter.tableAlias();
-        if(StringUtils.isNotBlank(tableAlias)){
-            tableAlias +=  ".";
+        if (StringUtils.isNotBlank(tableAlias)) {
+            tableAlias += ".";
         }
 
         //获取子部门ID
@@ -73,7 +75,7 @@ public class DataFilterAspect {
         filterSql.append(tableAlias).append("dept_id in(").append(subDeptIds).append(")");
 
         //没有本部门数据权限，也能查询本人数据
-        if(dataFilter.user()){
+        if (dataFilter.user()) {
             filterSql.append(" or ").append(tableAlias).append("user_id=").append(user.getUserId());
         }
         filterSql.append(")");

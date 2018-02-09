@@ -63,13 +63,13 @@ public class SysRoleController extends BaseController {
     @RequestMapping("/select")
     @RequiresPermissions("sys:role:select")
     public R select() {
-        Map<String, Object> map = new HashMap<>();
+        Query query = new Query();
 
         //如果不是超级管理员，则只查询自己所拥有的角色列表
-        if (getUserId() != Constant.SUPER_ADMIN) {
-            map.put("createUserId", getUserId());
+        if (!Constant.SUPER_ADMIN.equals(getUserId())) {
+            query.put("createUserId", getUserId());
         }
-        List<SysRoleEntity> list = sysRoleService.queryList(map);
+        List<SysRoleEntity> list = sysRoleService.queryList(query);
 
         return R.ok().put("list", list);
     }

@@ -59,19 +59,12 @@ public abstract class CrudService<D extends CrudDao<T>, T extends BaseEntity<T>>
         return dao.queryObject(id);
     }
 
-    public List<T> queryList(Map<String, Object> map) {
-        if (map instanceof Query) {
-            PageHelper.startPage(map);
-        }
-        return dao.queryList(map);
+    public List<T> queryList(Query query) {
+        return dao.queryList(query);
     }
 
-    public List<T> queryList(String id) {
-        return dao.queryList(id);
-    }
-
-    public int queryTotal(Map<String, Object> map) {
-        return dao.queryTotal(map);
+    public int queryTotal(Query query) {
+        return dao.queryTotal(query);
     }
 
     public int queryTotal() {

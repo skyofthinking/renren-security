@@ -2,6 +2,7 @@ package io.renren.modules.sys.service;
 
 import io.renren.common.annotation.DataFilter;
 import io.renren.common.base.CrudService;
+import io.renren.common.utils.Query;
 import io.renren.modules.sys.dao.SysUserDao;
 import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.sys.shiro.ShiroUtils;
@@ -57,13 +58,13 @@ public class SysUserService extends CrudService<SysUserDao, SysUserEntity> {
     }
 
     @DataFilter(tableAlias = "u", user = false)
-    public List<SysUserEntity> queryList(Map<String, Object> map) {
-        return dao.queryList(map);
+    public List<SysUserEntity> queryList(Query query) {
+        return dao.queryList(query);
     }
 
     @DataFilter(tableAlias = "u", user = false)
-    public int queryTotal(Map<String, Object> map) {
-        return dao.queryTotal(map);
+    public int queryTotal(Query query) {
+        return dao.queryTotal(query);
     }
 
     @Override
