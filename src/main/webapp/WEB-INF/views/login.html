@@ -23,7 +23,7 @@
 <body class="hold-transition login-page">
 <div class="login-box" id="rrapp" v-cloak>
     <div class="login-logo">
-        <b>人人权限系统</b>
+        <b>系统登录</b>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -100,7 +100,7 @@
                     dataType: "json",
                     success: function (result) {
                         if (result.code == 0) {//登录成功
-                            parent.location.href = 'index1.html';
+                            parent.location.href = 'index2.html';
                         } else {
                             vm.error = true;
                             vm.errorMsg = result.msg;

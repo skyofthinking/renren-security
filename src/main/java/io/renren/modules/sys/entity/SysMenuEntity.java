@@ -33,12 +33,12 @@ public class SysMenuEntity extends DataEntity<SysMenuEntity> {
     /**
      * 菜单名称
      */
-    private String name;
+    private String title;
 
     /**
      * 菜单URL
      */
-    private String url;
+    private String href;
 
     /**
      * 授权(多个用逗号分隔，如：user:list,user:create)
@@ -70,68 +70,46 @@ public class SysMenuEntity extends DataEntity<SysMenuEntity> {
      */
     private Boolean open;
 
-    private List<?> list;
-
-    public void setMenuId(String menuId) {
-        this.menuId = menuId;
-    }
+    private List<?> children; // 子菜单列表
 
     public String getMenuId() {
         return menuId;
     }
 
-    /**
-     * 设置：父菜单ID，一级菜单为0
-     *
-     * @param parentId 父菜单ID，一级菜单为0
-     */
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
     }
 
-    /**
-     * 获取：父菜单ID，一级菜单为0
-     *
-     * @return Long
-     */
     public String getParentId() {
         return parentId;
     }
 
-    /**
-     * 设置：菜单名称
-     *
-     * @param name 菜单名称
-     */
-    public void setName(String name) {
-        this.name = name;
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
-    /**
-     * 获取：菜单名称
-     *
-     * @return String
-     */
-    public String getName() {
-        return name;
+    public String getParentName() {
+        return parentName;
     }
 
-    /**
-     * 设置：菜单URL
-     *
-     * @param url 菜单URL
-     */
-    public void setUrl(String url) {
-        this.url = url;
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 
-    /**
-     * 获取：菜单URL
-     *
-     * @return String
-     */
-    public String getUrl() {
-        return url;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getHref() {
+        return href;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
     }
 
     public String getPerms() {
@@ -150,40 +128,20 @@ public class SysMenuEntity extends DataEntity<SysMenuEntity> {
         this.type = type;
     }
 
-    /**
-     * 设置：菜单图标
-     *
-     * @param icon 菜单图标
-     */
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    /**
-     * 获取：菜单图标
-     *
-     * @return String
-     */
     public String getIcon() {
         return icon;
     }
 
-    /**
-     * 设置：排序
-     *
-     * @param orderNum 排序
-     */
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    /**
-     * 获取：排序
-     *
-     * @return Integer
-     */
     public Integer getOrderNum() {
         return orderNum;
+    }
+
+    public void setOrderNum(Integer orderNum) {
+        this.orderNum = orderNum;
     }
 
     public String getSysMenu() {
@@ -194,27 +152,19 @@ public class SysMenuEntity extends DataEntity<SysMenuEntity> {
         this.sysMenu = sysMenu;
     }
 
-    public List<?> getList() {
-        return list;
-    }
-
-    public void setList(List<?> list) {
-        this.list = list;
-    }
-
-    public String getParentName() {
-        return parentName;
-    }
-
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
-    }
-
     public Boolean getOpen() {
         return open;
     }
 
     public void setOpen(Boolean open) {
         this.open = open;
+    }
+
+    public List<?> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<?> children) {
+        this.children = children;
     }
 }

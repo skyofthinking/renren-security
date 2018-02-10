@@ -94,7 +94,7 @@ public class SysMenuService extends CrudService<SysMenuDao, SysMenuEntity> {
 
         for (SysMenuEntity entity : menuList) {
             if (entity.getType() == Constant.MenuType.CATALOG.getValue()) {//目录
-                entity.setList(getMenuTreeList(queryListParentId(entity.getMenuId(), menuIdList), menuIdList));
+                entity.setChildren(getMenuTreeList(queryListParentId(entity.getMenuId(), menuIdList), menuIdList));
             }
             subMenuList.add(entity);
         }

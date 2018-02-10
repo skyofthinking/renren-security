@@ -4,66 +4,57 @@
     <title>参数管理</title>
     <#include "/header.html">
 </head>
-<body>
+<body class="childrenBody">
 <div id="rrapp" v-cloak>
     <div v-show="showList">
-        <div class="animated fadeIn" >
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="fa fa-align-justify"></i> 参数列表
-                        </div>
-                        <div class="card-body">
-                            <div class=" form-horizontal">
-                                <div class="form-group row">
-                                    <div class="col-md-3">
-                                        <div class="input-group">
-                                            <span class="input-group-addon search-content">参数名</span>
-                                            <input type="text" v-model="q.keyword" @keyup.enter="query" class="form-control search-content"/>
-                                        </div>
-                                    </div>
-                                    <a class="btn btn-default" @click="query">查询</a>
-
-                                    <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-                                    <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-                                    <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
-                                </div>
-                                <table class="layui-table table-responsive-sm" id="table" lay-filter="table"></table>
+        <form class="layui-form">
+            <blockquote class="layui-elem-quote quoteBox">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">参数名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" v-model="q.keyword" @keyup.enter="query" autocomplete="off" class="layui-input searchVal" placeholder="请输入搜索的内容"/>
                             </div>
                         </div>
                     </div>
-                    <!--/.row-->
-                </div>
-            </div>
-        </div>
+                    <div class="layui-form-item">
+                        <a class="layui-btn search_btn" @click="query">查询</a>
+                        <a class="layui-btn layui-btn-normal" @click="add">新增</a>
+                        <a class="layui-btn layui-btn-normal" @click="update">修改</a>
+                        <a class="layui-btn layui-btn-danger layui-btn-normal" @click="del">删除</a>
+                    </div>
+                </form>
+            </BLOCKQUOTE>
+            <table id="table" lay-filter="table"></table>
+        </form>
     </div>
 
-    <div v-show="!showList" class="panel panel-default">
-        <div class="panel-heading">{{title}}</div>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <div class="col-sm-2 control-label">参数名</div>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="config.keyword" placeholder="参数名"/>
+    <div v-show="!showList">
+        <form class="layui-form">
+            <div class="layui-form-item layui-row layui-col-xs12">
+                <label class="layui-form-label">参数名</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" v-model="config.keyword" placeholder="请输入参数名">
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-2 control-label">参数值</div>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="config.value" placeholder="参数值"/>
+            <div class="layui-form-item layui-row layui-col-xs12">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" v-model="config.value" placeholder="请输入参数值">
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-2 control-label">备注</div>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="config.remarks" placeholder="备注"/>
+            <div class="layui-form-item layui-row layui-col-xs12">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入备注" class="layui-textarea" v-model="config.remarks"></textarea>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-2 control-label"></div>
-                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
-                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            <div class="layui-form-item layui-row layui-col-xs12">
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn layui-btn-sm" @click="saveOrUpdate">确定</button>
+                    <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" @click="reload">取消</button>
+                </div>
             </div>
         </form>
     </div>

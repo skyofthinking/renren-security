@@ -64,7 +64,7 @@ public class SysMenuController extends BaseController {
         //添加顶级菜单
         SysMenuEntity root = new SysMenuEntity();
         root.setMenuId("0");
-        root.setName("一级菜单");
+        root.setTitle("一级菜单");
         root.setParentId("-1");
         root.setOpen(true);
         menuList.add(root);
@@ -139,7 +139,7 @@ public class SysMenuController extends BaseController {
      * 验证参数是否正确
      */
     private void verifyForm(SysMenuEntity menu) {
-        if (StringUtils.isBlank(menu.getName())) {
+        if (StringUtils.isBlank(menu.getTitle())) {
             throw new RRException("菜单名称不能为空");
         }
 
@@ -149,7 +149,7 @@ public class SysMenuController extends BaseController {
 
         //菜单
         if (menu.getType() == Constant.MenuType.MENU.getValue()) {
-            if (StringUtils.isBlank(menu.getUrl())) {
+            if (StringUtils.isBlank(menu.getHref())) {
                 throw new RRException("菜单URL不能为空");
             }
         }
