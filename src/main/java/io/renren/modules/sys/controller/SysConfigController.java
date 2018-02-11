@@ -64,25 +64,12 @@ public class SysConfigController extends BaseController {
 
     /**
      * 保存配置
+     * 通过主键判断增加或修改
      */
     @SysLog("保存配置")
     @RequestMapping("/save")
     @RequiresPermissions("sys:config:save")
     public R save(@RequestBody SysConfigEntity sysConfigEntity) {
-        ValidatorUtils.validateEntity(sysConfigEntity);
-
-        sysConfigService.save(sysConfigEntity);
-
-        return R.ok();
-    }
-
-    /**
-     * 修改配置
-     */
-    @SysLog("修改配置")
-    @RequestMapping("/update")
-    @RequiresPermissions("sys:config:update")
-    public R update(@RequestBody SysConfigEntity sysConfigEntity) {
         ValidatorUtils.validateEntity(sysConfigEntity);
 
         sysConfigService.save(sysConfigEntity);
