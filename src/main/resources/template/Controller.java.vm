@@ -18,6 +18,7 @@ import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.Query;
 import io.renren.common.utils.R;
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.PageHelper;
 
 /**
  * ${comments}
@@ -40,14 +41,17 @@ public class ${className}Controller extends BaseController {
 	public R list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
+        PageHelper.startPage(query.getPage(), query.getLimit());
 
 		List<${className}Entity> ${classname}List = ${classname}Service.queryList(query);
         PageInfo page = new PageInfo(${classname}List);
         int total = (int) page.getTotal();
 
-		PageUtils pageUtils = new PageUtils(${classname}List, total, query.getLimit(), query.getPage());
-		
-		return R.ok().put("page", pageUtils);
+        R r = R.ok();
+        r.put("count", total);
+        r.put("data", sysConfigList);
+
+		return r;
 	}
 
 	/**
@@ -62,27 +66,16 @@ public class ${className}Controller extends BaseController {
 	}
 	
 	/**
-	 * 保存
+	 * 新增或修改
 	 */
-	@RequestMapping("/insert")
-	@RequiresPermissions("${pathName}:insert")
-	public R insert(@RequestBody ${className}Entity ${classname}){
+    @RequestMapping("/save")
+    @RequiresPermissions(value = {"sys:${pathName}:insert", "sys:${pathName}:update"}, logical = Logical.OR)
+    public R save(@RequestBody ${className}Entity ${classname}){
 		${classname}Service.save(${classname});
-		
-		return R.ok();
-	}
-	
-	/**
-	 * 修改
-	 */
-	@RequestMapping("/update")
-	@RequiresPermissions("${pathName}:update")
-	public R update(@RequestBody ${className}Entity ${classname}){
-		${classname}Service.save(${classname});
-		
-		return R.ok();
-	}
-	
+
+        return R.ok();
+    }
+
 	/**
 	 * 删除
 	 */

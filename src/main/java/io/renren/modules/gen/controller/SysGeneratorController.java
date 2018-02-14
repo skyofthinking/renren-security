@@ -1,5 +1,7 @@
 package io.renren.modules.gen.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 import io.renren.common.base.BaseController;
 import io.renren.common.utils.PageUtils;
@@ -44,12 +46,17 @@ public class SysGeneratorController extends BaseController {
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
-        List<SysGeneratorEntity> list = sysGeneratorService.queryList(query);
-        int total = sysGeneratorService.queryTotal(query);
+        PageHelper.startPage(query.getPage(), query.getLimit());
 
-        PageUtils pageUtil = new PageUtils(list, total, query.getLimit(), query.getPage());
+        List<SysGeneratorEntity> sysGeneratorList = sysGeneratorService.queryList(query);
+        PageInfo page = new PageInfo(sysGeneratorList);
+        int total = (int) page.getTotal();
 
-        return R.ok().put("page", pageUtil);
+        R r = R.ok();
+        r.put("count", total);
+        r.put("data", sysGeneratorList);
+
+        return r;
     }
 
     /**

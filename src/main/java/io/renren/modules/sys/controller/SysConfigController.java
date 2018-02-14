@@ -1,5 +1,6 @@
 package io.renren.modules.sys.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.renren.common.annotation.SysLog;
 import io.renren.common.base.BaseController;
@@ -9,6 +10,7 @@ import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.Query;
 import io.renren.common.utils.R;
 import io.renren.common.validator.ValidatorUtils;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,11 +40,11 @@ public class SysConfigController extends BaseController {
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
+        PageHelper.startPage(query.getPage(), query.getLimit());
+
         List<SysConfigEntity> sysConfigList = sysConfigService.queryList(query);
         PageInfo page = new PageInfo(sysConfigList);
         int total = (int) page.getTotal();
-
-        PageUtils pageUtils = new PageUtils(sysConfigList, total, query.getLimit(), query.getPage());
 
         R r = R.ok();
         r.put("count", total);
@@ -68,12 +70,10 @@ public class SysConfigController extends BaseController {
      */
     @SysLog("保存配置")
     @RequestMapping("/save")
-    @RequiresPermissions("sys:config:save")
+    @RequiresPermissions(value = {"sys:config:insert", "sys:config:update"}, logical = Logical.OR)
     public R save(@RequestBody SysConfigEntity sysConfigEntity) {
         ValidatorUtils.validateEntity(sysConfigEntity);
-
         sysConfigService.save(sysConfigEntity);
-
         return R.ok();
     }
 

@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>代码生成器</title>
-<#include "/header.html">
+	<title>参数管理</title>
+	<#include "/header.html">
 </head>
-<body>
-<div id="rrapp">
-	<div class="grid-btn">
-		<div class="form-group col-sm-2">
-			<input type="text" class="form-control" v-model="q.tableName" @keyup.enter="query" placeholder="表名">
-		</div>
-		<a class="btn btn-default" @click="query">查询</a>
-		<a class="btn btn-primary" @click="generator"><i class="fa fa-file-code-o"></i>&nbsp;生成代码</a>
-	</div>
-    <table id="jqGrid"></table>
-    <div id="jqGridPager"></div>
-</div>
-
+<body class="childrenBody">
+<form class="layui-form">
+	<blockquote class="layui-elem-quote quoteBox">
+		<form class="layui-form">
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">表名</label>
+					<div class="layui-input-inline">
+						<input type="text" name="tableName" autocomplete="off" class="layui-input search_tableName" placeholder="请输入搜索的内容"/>
+					</div>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<a class="layui-btn search_btn" data-type="reload">查询</a>
+			</div>
+			<div class="layui-inline">
+				<a class="layui-btn layui-btn-normal generator_btn">生成代码</a>
+			</div>
+		</form>
+	</blockquote>
+	<table id="table" lay-filter="table"></table>
+</form>
+<#include "/footer.html">
 <script src="${request.contextPath}/statics/js/modules/gen/generator.js?_${.now?long}"></script>
 </body>
 </html>

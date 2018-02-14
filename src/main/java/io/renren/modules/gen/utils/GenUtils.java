@@ -41,6 +41,8 @@ public class GenUtils {
         templates.add("template/Controller.java.vm");
         templates.add("template/list.html.vm");
         templates.add("template/list.js.vm");
+        templates.add("template/form.html.vm");
+        templates.add("template/form.js.vm");
         templates.add("template/menu.sql.vm");
         return templates;
     }
@@ -209,11 +211,20 @@ public class GenUtils {
 
         if (template.contains("list.html.vm")) {
             return "main" + File.separator + "webapp" + File.separator + "WEB-INF" + File.separator + "views"
-                    + File.separator + "modules" + File.separator + lastDir + File.separator + className.toLowerCase() + ".html";
+                    + File.separator + "modules" + File.separator + lastDir + File.separator + className.toLowerCase() + "List.html";
         }
 
         if (template.contains("list.js.vm")) {
-            return "main" + File.separator + "webapp" + File.separator + "statics" + File.separator + "js" + File.separator + "modules" + File.separator + lastDir + File.separator + className.toLowerCase() + ".js";
+            return "main" + File.separator + "webapp" + File.separator + "statics" + File.separator + "js" + File.separator + "modules" + File.separator + lastDir + File.separator + className.toLowerCase() + "List.js";
+        }
+
+        if (template.contains("form.html.vm")) {
+            return "main" + File.separator + "webapp" + File.separator + "WEB-INF" + File.separator + "views"
+                    + File.separator + "modules" + File.separator + lastDir + File.separator + className.toLowerCase() + "Form.html";
+        }
+
+        if (template.contains("form.js.vm")) {
+            return "main" + File.separator + "webapp" + File.separator + "statics" + File.separator + "js" + File.separator + "modules" + File.separator + lastDir + File.separator + className.toLowerCase() + "Form.js";
         }
 
         if (template.contains("menu.sql.vm")) {

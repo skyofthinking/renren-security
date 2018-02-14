@@ -1,123 +1,143 @@
-$(function () {
-    $("#jqGrid").jqGrid({
+layui.use(['form', 'layer', 'table', 'laytpl'], function () {
+    var form = layui.form,
+        layer = parent.layer === undefined ? layui.layer : top.layer,
+        $ = layui.jquery,
+        laytpl = layui.laytpl,
+        table = layui.table;
+
+    // 列表
+    var tableIns = table.render({
+        elem: '#table',
         url: baseURL + '${pathName}/list',
-        datatype: "json",
-        colModel: [			
-#foreach($column in $columns)
-#if($column.columnName == $pk.columnName)
-			{ label: '${column.attrname}', name: '${column.attrname}', index: '${column.columnName}', width: 50, key: true },
-#else
-			{ label: '${column.comments}', name: '${column.attrname}', index: '${column.columnName}', width: 80 }#if($velocityCount != $columns.size()), #end
-			
-#end			
-#end
-        ],
-		viewrecords: true,
-        height: 385,
-        rowNum: 10,
-		rowList : [10,30,50],
-        rownumbers: true, 
-        rownumWidth: 25, 
-        autowidth:true,
-        multiselect: true,
-        pager: "#jqGridPager",
-        jsonReader : {
-            root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
-        },
-        prmNames : {
-            page:"page", 
-            rows:"limit", 
-            order: "order"
-        },
-        gridComplete:function(){
-        	//隐藏grid底部滚动条
-        	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 
+        cellMinWidth: 95,
+        page: true,
+        height: "full-200",
+        limits: [10, 20, 50, 100],
+        limit: 10,
+        cols: [[
+            {type: "checkbox", fixed: "left", width: 50},
+			#foreach($column in $columns)
+				#if($column.columnName == $pk.columnName)
+                    {field: '${column.attrname}', minWidth: 100, title: '${column.attrname}', sort: true},
+				#else
+                    {field: '${column.comments}', minWidth: 100, title: '${column.attrname}', sort: true},
+				#end
+			#end
+            {title: '操作', minWidth: 100, templet: '#tableListBar', fixed: "right", align: "center"}
+        ]]
+    });
+
+    // 搜索
+    $(".search_btn").on("click", function () {
+        table.reload("table", {
+            page: {
+                curr: 1 //重新从第 1 页开始
+            },
+            where: {
+                keyword: $(".search_uid").val()  //搜索的关键字
+            }
+        })
+    });
+
+    // 添加或修改
+    function info(edit) {
+        if (edit) {
+            var loadData = layer.load(2, {shade: 0.1});
+
+            $.get(baseURL + '${pathName}/info/' + edit.${pk.attrname}, function (data) {
+                info_submit(edit, data, loadData);
+            });
+        } else {
+            info_submit(edit)
+        }
+    }
+
+    function info_submit(edit, data, loadData) {
+        var info_title = "";
+        if (edit) {
+            info_title = "新增"
+        } else {
+            info_title = "修改"
+		}
+        var index = layui.layer.open({
+            title: info_title,
+            type: 2,
+            content: "${classname}Form.html",
+            success: function (layero, index) {
+                var body = layui.layer.getChildFrame('body', index);
+
+                if (edit) {
+					#foreach($column in $columns)
+                        body.find(".${column.attrname}").val(data.${classname}.${column.attrname});
+					#end
+                    layer.close(loadData);
+                }
+
+                form.render();
+                setTimeout(function () {
+                    layui.layer.tips('点击此处返回列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                }, 500)
+            }
+        })
+        layui.layer.full(index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize", function () {
+            layui.layer.full(index);
+        })
+    }
+
+    $(".add_btn").click(function () {
+        info();
+    })
+
+    // 批量删除
+    $(".delete_all_btn").click(function () {
+        var checkStatus = table.checkStatus('table'),
+            data = checkStatus.data,
+            uid = [];
+        if (data.length > 0) {
+            for (var i in data) {
+                uid.push(data[i].${pk.attrname});
+            }
+            delete_submit(uid);
+        } else {
+            layer.msg("请选择需要删除的信息");
+        }
+    })
+
+    function delete_submit(uid) {
+        layer.confirm('确定删除？', {icon: 3, title: '提示信息'}, function (index) {
+            $.ajax({
+                type: "POST",
+                url: baseURL + '${pathName}/delete',
+                contentType: "application/json",
+                data: JSON.stringify(uid),
+                success: function (r) {
+                    if (r.code === 0) {
+                        layer.msg('删除成功', {icon: 1});
+                        tableIns.reload();
+                        layer.close(index);
+                    } else {
+                        layer.msg(r.msg, {icon: 2});
+                    }
+                }
+            });
+        })
+    }
+
+    //列表操作
+    table.on('tool(table)', function (obj) {
+        var layEvent = obj.event, data = obj.data;
+
+        if (layEvent === 'edit_btn') { //编辑
+            info(data);
+        } else if (layEvent === 'delete_btn') { //删除
+            var uid = [];
+            uid.push(data.${pk.attrname});
+            delete_submit(uid);
         }
     });
-});
 
-var vm = new Vue({
-	el:'#rrapp',
-	data:{
-		showList: true,
-		title: null,
-		${classname}: {}
-	},
-	methods: {
-		query: function () {
-			vm.reload();
-		},
-		add: function(){
-			vm.showList = false;
-			vm.title = "新增";
-			vm.${classname} = {};
-		},
-		update: function (event) {
-			var $pk.attrname = getSelectedRow();
-			if($pk.attrname == null){
-				return ;
-			}
-			vm.showList = false;
-            vm.title = "修改";
-            
-            vm.getInfo(${pk.attrname})
-		},
-		saveOrUpdate: function (event) {
-			var url = vm.${classname}.${pk.attrname} == null ? "${pathName}/insert" : "${pathName}/update";
-			$.ajax({
-				type: "POST",
-			    url: baseURL + url,
-			    contentType: "application/json",
-			    data: JSON.stringify(vm.${classname}),
-			    success: function(r){
-			    	if(r.code === 0){
-						alert('操作成功', function(index){
-							vm.reload();
-						});
-					}else{
-						alert(r.msg);
-					}
-				}
-			});
-		},
-		del: function (event) {
-			var ${pk.attrname}s = getSelectedRows();
-			if(${pk.attrname}s == null){
-				return ;
-			}
-			
-			confirm('确定要删除选中的记录？', function(){
-				$.ajax({
-					type: "POST",
-				    url: baseURL + "${pathName}/delete",
-				    contentType: "application/json",
-				    data: JSON.stringify(${pk.attrname}s),
-				    success: function(r){
-						if(r.code == 0){
-							alert('操作成功', function(index){
-								$("#jqGrid").trigger("reloadGrid");
-							});
-						}else{
-							alert(r.msg);
-						}
-					}
-				});
-			});
-		},
-		getInfo: function(${pk.attrname}){
-			$.get(baseURL + "${pathName}/info/"+${pk.attrname}, function(r){
-                vm.${classname} = r.${classname};
-            });
-		},
-		reload: function (event) {
-			vm.showList = true;
-			var page = $("#jqGrid").jqGrid('getGridParam','page');
-			$("#jqGrid").jqGrid('setGridParam',{ 
-                page:page
-            }).trigger("reloadGrid");
-		}
-	}
-});
+})

@@ -1,54 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>${comments}</title>
-#set($header='<#include "/header.html">')
-#set($insert='<#if shiro.hasPermission("'+${pathName}+':insert")>')
-#set($update='<#if shiro.hasPermission("'+${pathName}+':update")>')
-#set($delete='<#if shiro.hasPermission("'+${pathName}+':delete")>')
-#set($end='</#if>')
-$header
+    <title>${comments}</title>
+	#set($header='<#include "/header.html">')
+	#set($footer='<#include "/footer.html">')
+	#set($insert='<#if shiro.hasPermission("'+${pathName}+':insert")>')
+	#set($update='<#if shiro.hasPermission("'+${pathName}+':update")>')
+	#set($delete='<#if shiro.hasPermission("'+${pathName}+':delete")>')
+	#set($end='</#if>')
+	$header
 </head>
-<body>
-<div id="rrapp" v-cloak>
-	<div v-show="showList">
-		<div class="grid-btn">
+<body class="childrenBody">
+<form class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">UID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="uid" autocomplete="off" class="layui-input search_uid" placeholder="请输入搜索的内容"/>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <a class="layui-btn search_btn" data-type="reload">查询</a>
+            </div>
 			$insert
-            <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-			$end
-			$update
-            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-normal add_btn">增加</a>
+            </div>
 			$end
 			$delete
-            <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-danger layui-btn-normal delete_all_btn">批量删除</a>
+            </div>
 			$end
-		</div>
-	    <table id="jqGrid"></table>
-	    <div id="jqGridPager"></div>
-    </div>
-    
-    <div v-show="!showList" class="panel panel-default">
-		<div class="panel-heading">{{title}}</div>
-		<form class="form-horizontal">
-		#foreach($column in $columns)
-		#if($column.columnName != $pk.columnName)
-			<div class="form-group">
-			   	<div class="col-sm-2 control-label">${column.comments}</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="${classname}.${column.attrname}" placeholder="${column.comments}"/>
-			    </div>
-			</div>
-		#end
-		#end
-			<div class="form-group">
-				<div class="col-sm-2 control-label"></div> 
-				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
-				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
-			</div>
-		</form>
-	</div>
-</div>
+        </form>
+    </blockquote>
+    <table id="table" lay-filter="table"></table>
 
-<script src="${request.contextPath}/statics/js/modules/${lastDir}/${pathName}.js?_${.now?long}"></script>
+    <!--操作-->
+    <script type="text/html" id="tableListBar">
+		$update
+        <a class="layui-btn layui-btn-xs" lay-event="edit_btn">编辑</a>
+		$end
+		$delete
+		<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete_btn">删除</a>
+		$end
+    </script>
+</form>
+$footer
+<script src="${request.contextPath}/statics/js/modules/${lastDir}/${pathName}List.js?_${.now?long}"></script>
 </body>
 </html>

@@ -49,8 +49,14 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
     }
 
     function info_submit(edit, data, loadData) {
+        var info_title = "";
+        if (edit) {
+            info_title = "新增"
+        } else {
+            info_title = "修改"
+        }
         var index = layui.layer.open({
-            title: "添加用户",
+            title: info_title,
             type: 2,
             content: "configForm.html",
             success: function (layero, index) {
