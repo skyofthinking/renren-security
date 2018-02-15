@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>测试表</title>
+		<#include "/header.html">
+</head>
+<body class="childrenBody">
+<form class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">UID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="uid" autocomplete="off" class="layui-input search_uid" placeholder="请输入搜索的内容"/>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <a class="layui-btn search_btn" data-type="reload">查询</a>
+            </div>
+			<#if shiro.hasPermission("systest:insert")>
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-normal add_btn">增加</a>
+            </div>
+			</#if>
+			<#if shiro.hasPermission("systest:delete")>
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-danger layui-btn-normal delete_all_btn">批量删除</a>
+            </div>
+			</#if>
+        </form>
+    </blockquote>
+    <table id="table" lay-filter="table"></table>
+
+    <!--操作-->
+    <script type="text/html" id="tableListBar">
+		<#if shiro.hasPermission("systest:update")>
+        <a class="layui-btn layui-btn-xs" lay-event="edit_btn">编辑</a>
+		</#if>
+		<#if shiro.hasPermission("systest:delete")>
+		<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete_btn">删除</a>
+		</#if>
+    </script>
+</form>
+<#include "/footer.html">
+<script src="${request.contextPath}/statics/js/modules/job/systestList.js?_${.now?long}"></script>
+</body>
+</html>

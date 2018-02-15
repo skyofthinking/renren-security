@@ -22,7 +22,8 @@ public class TableEntity extends DataEntity<TableEntity> {
     private ColumnEntity pk;
     //表的列名(不包含主键)
     private List<ColumnEntity> columns;
-
+    //表的列名
+    private List<ColumnEntity> allColumns;
     //类名(第一个字母大写)，如：sys_user => SysUser
     private String className;
     //类名(第一个字母小写)，如：sys_user => sysUser
@@ -58,6 +59,14 @@ public class TableEntity extends DataEntity<TableEntity> {
 
     public void setColumns(List<ColumnEntity> columns) {
         this.columns = columns;
+    }
+
+    public List<ColumnEntity> getAllColumns() {
+        return allColumns;
+    }
+
+    public void setAllColumns(List<ColumnEntity> allColumns) {
+        this.allColumns = allColumns;
     }
 
     public String getClassName() {

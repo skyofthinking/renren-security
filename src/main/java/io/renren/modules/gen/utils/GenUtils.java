@@ -64,7 +64,16 @@ public class GenUtils {
         tableEntity.setClassName(className);
         tableEntity.setClassname(StringUtils.uncapitalize(className));
 
+        List excludeColumns = new ArrayList();
+        excludeColumns.add("create_by");
+        excludeColumns.add("create_date");
+        excludeColumns.add("update_by");
+        excludeColumns.add("update_date");
+        excludeColumns.add("remarks");
+        excludeColumns.add("del_flag");
+
         //列信息
+        List<ColumnEntity> allColumsList = new ArrayList<>();
         List<ColumnEntity> columsList = new ArrayList<>();
         for (Map<String, String> column : columns) {
             ColumnEntity columnEntity = new ColumnEntity();
@@ -87,9 +96,13 @@ public class GenUtils {
                 tableEntity.setPk(columnEntity);
             }
 
-            columsList.add(columnEntity);
+            if (!excludeColumns.contains(columnEntity.getColumnName())) {
+                columsList.add(columnEntity);
+            }
+            allColumsList.add(columnEntity);
         }
         tableEntity.setColumns(columsList);
+        tableEntity.setAllColumns(allColumsList);
 
         //没主键，则第一个字段为主键
         if (tableEntity.getPk() == null) {
@@ -110,6 +123,7 @@ public class GenUtils {
         map.put("classname", tableEntity.getClassname());
         map.put("pathName", tableEntity.getClassname().toLowerCase());
         map.put("columns", tableEntity.getColumns());
+        map.put("allColumns", tableEntity.getAllColumns());
         map.put("package", config.getString("package"));
         map.put("author", config.getString("author"));
         map.put("email", config.getString("email"));
@@ -123,7 +137,7 @@ public class GenUtils {
         map.put("menu_id_delete", IdGen.uuid());
 
         String packageName = config.getString("package");
-        String lastDir= packageName.substring(packageName.lastIndexOf(".") + 1);
+        String lastDir = packageName.substring(packageName.lastIndexOf(".") + 1);
         map.put("lastDir", lastDir);
 
         VelocityContext context = new VelocityContext(map);
@@ -183,7 +197,7 @@ public class GenUtils {
     public static String getFileName(String template, String className, String packageName) {
         String packagePath = "main" + File.separator + "java" + File.separator;
         String resourcesPath = "main" + File.separator + "resources" + File.separator;
-        String lastDir= packageName.substring(packageName.lastIndexOf(".") + 1);
+        String lastDir = packageName.substring(packageName.lastIndexOf(".") + 1);
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator;
         }

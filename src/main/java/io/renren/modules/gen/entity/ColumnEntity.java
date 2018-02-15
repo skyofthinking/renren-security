@@ -27,6 +27,9 @@ public class ColumnEntity extends DataEntity<ColumnEntity> {
     private String attrType;
     //auto_increment
     private String extra;
+    //
+    private String isInsert;
+    private String isUpdate;
 
     public String getColumnName() {
         return columnName;
@@ -82,5 +85,21 @@ public class ColumnEntity extends DataEntity<ColumnEntity> {
 
     public void setExtra(String extra) {
         this.extra = extra;
+    }
+
+    public String getIsInsert() {
+        return isInsert;
+    }
+
+    public void setIsInsert(String isInsert) {
+        this.isInsert = isInsert;
+    }
+
+    public String getIsUpdate() {
+        return isUpdate;
+    }
+
+    public void setIsUpdate(String isUpdate) {
+        this.isUpdate = isUpdate;
     }
 }

@@ -1,4 +1,4 @@
-package ${package}.controller;
+package io.renren.modules.job.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import io.renren.common.base.BaseController;
 
-import ${package}.entity.${className}Entity;
-import ${package}.service.${className}Service;
+import io.renren.modules.job.entity.SysTestEntity;
+import io.renren.modules.job.service.SysTestService;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.Query;
 import io.renren.common.utils.R;
@@ -22,35 +22,35 @@ import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.PageHelper;
 
 /**
- * ${comments}
+ * 测试表
  * 
- * @author ${author}
- * @email ${email}
- * @date ${datetime}
+ * @author chenshun
+ * @email sunlightcs@gmail.com
+ * @date 2018-02-15 16:32:03
  */
 @RestController
-@RequestMapping("${pathName}")
-public class ${className}Controller extends BaseController {
+@RequestMapping("systest")
+public class SysTestController extends BaseController {
 	@Autowired
-	private ${className}Service ${classname}Service;
+	private SysTestService sysTestService;
 	
 	/**
 	 * 列表
 	 */
 	@RequestMapping("/list")
-	@RequiresPermissions("${pathName}:list")
+	@RequiresPermissions("systest:list")
 	public R list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
         PageHelper.startPage(query.getPage(), query.getLimit());
 
-		List<${className}Entity> ${classname}List = ${classname}Service.queryList(query);
-        PageInfo page = new PageInfo(${classname}List);
+		List<SysTestEntity> sysTestList = sysTestService.queryList(query);
+        PageInfo page = new PageInfo(sysTestList);
         int total = (int) page.getTotal();
 
         R r = R.ok();
         r.put("count", total);
-        r.put("data", ${classname}List);
+        r.put("data", sysTestList);
 
 		return r;
 	}
@@ -58,21 +58,21 @@ public class ${className}Controller extends BaseController {
 	/**
 	 * 信息
 	 */
-	@RequestMapping("/info/{${pk.attrname}}")
-	@RequiresPermissions("${pathName}:info")
-	public R info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
-		${className}Entity ${classname} = ${classname}Service.queryObject(${pk.attrname});
+	@RequestMapping("/info/{uid}")
+	@RequiresPermissions("systest:info")
+	public R info(@PathVariable("uid") String uid){
+		SysTestEntity sysTest = sysTestService.queryObject(uid);
 		
-		return R.ok().put("${classname}", ${classname});
+		return R.ok().put("sysTest", sysTest);
 	}
 	
 	/**
 	 * 新增或修改
 	 */
     @RequestMapping("/save")
-    @RequiresPermissions(value = {"${pathName}:insert", "${pathName}:update"}, logical = Logical.OR)
-    public R save(@RequestBody ${className}Entity ${classname}){
-		${classname}Service.save(${classname});
+    @RequiresPermissions(value = {"systest:insert", "systest:update"}, logical = Logical.OR)
+    public R save(@RequestBody SysTestEntity sysTest){
+		sysTestService.save(sysTest);
 
         return R.ok();
     }
@@ -81,9 +81,9 @@ public class ${className}Controller extends BaseController {
 	 * 删除
 	 */
 	@RequestMapping("/delete")
-	@RequiresPermissions("${pathName}:delete")
-	public R delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s){
-		${classname}Service.deleteBatch(${pk.attrname}s);
+	@RequiresPermissions("systest:delete")
+	public R delete(@RequestBody String[] uids){
+		sysTestService.deleteBatch(uids);
 		
 		return R.ok();
 	}

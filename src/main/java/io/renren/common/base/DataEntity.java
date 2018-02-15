@@ -41,7 +41,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
             setUid(uuid);
         }
         SysUserEntity user = UserUtils.getUser();
-        if (StringUtils.isNotBlank(user.getUid())) {
+        if (StringUtils.isNotBlank(user.getUserId())) {
             this.updateBy = user;
             this.createBy = user;
         }
@@ -55,7 +55,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
     @Override
     public void preUpdate() {
         SysUserEntity user = UserUtils.getUser();
-        if (StringUtils.isNotBlank(user.getUid())) {
+        if (StringUtils.isNotBlank(user.getUserId())) {
             this.updateBy = user;
         }
         this.updateDate = new Date();

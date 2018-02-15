@@ -8,7 +8,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
     // 列表
     var tableIns = table.render({
         elem: '#table',
-        url: baseURL + '${pathName}/list',
+        url: baseURL + 'systest/list',
         cellMinWidth: 95,
         page: true,
         height: "full-200",
@@ -16,14 +16,11 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         limit: 10,
         cols: [[
             {type: "checkbox", fixed: "left", width: 50},
-			#foreach($column in $columns)
-				#if($column.columnName == $pk.columnName)
-                    {field: '${column.attrname}', minWidth: 100, title: '${column.attrname}', sort: true},
-				#else
-                    {field: '${column.attrname}', minWidth: 100, title: '${column.comments}', sort: true},
-				#end
-			#end
-            {title: '操作', minWidth: 100, templet: '#tableListBar', fixed: "right", align: "center"}
+							                    {field: 'uid', minWidth: 100, title: 'uid', sort: true},
+											                    {field: 'keyword', minWidth: 100, title: '参数名', sort: true},
+											                    {field: 'value', minWidth: 100, title: '参数值', sort: true},
+											                    {field: 'status', minWidth: 100, title: '状态   0：隐藏   1：显示', sort: true},
+							            {title: '操作', minWidth: 100, templet: '#tableListBar', fixed: "right", align: "center"}
         ]]
     });
 
@@ -44,7 +41,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         if (edit) {
             var loadData = layer.load(2, {shade: 0.1});
 
-            $.get(baseURL + '${pathName}/info/' + edit.${pk.attrname}, function (data) {
+            $.get(baseURL + 'systest/info/' + edit.uid, function (data) {
                 info_submit(edit, data, loadData);
             });
         } else {
@@ -62,15 +59,16 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         var index = layui.layer.open({
             title: info_title,
             type: 2,
-            content: "${classname}Form.html",
+            content: "sysTestForm.html",
             success: function (layero, index) {
                 var body = layui.layer.getChildFrame('body', index);
 
                 if (edit) {
-					#foreach($column in $columns)
-                        body.find(".${column.attrname}").val(data.${classname}.${column.attrname});
-					#end
-                    layer.close(loadData);
+					                        body.find(".uid").val(data.sysTest.uid);
+					                        body.find(".keyword").val(data.sysTest.keyword);
+					                        body.find(".value").val(data.sysTest.value);
+					                        body.find(".status").val(data.sysTest.status);
+					                    layer.close(loadData);
                 }
 
                 form.render();
@@ -99,7 +97,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
             uid = [];
         if (data.length > 0) {
             for (var i in data) {
-                uid.push(data[i].${pk.attrname});
+                uid.push(data[i].uid);
             }
             delete_submit(uid);
         } else {
@@ -111,7 +109,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         layer.confirm('确定删除？', {icon: 3, title: '提示信息'}, function (index) {
             $.ajax({
                 type: "POST",
-                url: baseURL + '${pathName}/delete',
+                url: baseURL + 'systest/delete',
                 contentType: "application/json",
                 data: JSON.stringify(uid),
                 success: function (r) {
@@ -135,7 +133,7 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
             info(data);
         } else if (layEvent === 'delete_btn') { //删除
             var uid = [];
-            uid.push(data.${pk.attrname});
+            uid.push(data.uid);
             delete_submit(uid);
         }
     });

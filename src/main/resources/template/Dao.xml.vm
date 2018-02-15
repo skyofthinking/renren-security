@@ -33,30 +33,43 @@
 	<insert id="insert" parameterType="${package}.entity.${className}Entity"#if($pk.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$pk.attrname"#end>
 		insert into ${tableName}
 		(
-#foreach($column in $columns)
-#if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
-			$column.columnName#if($velocityCount != $columns.size()), #end
-
+#foreach($column in $allColumns)
+	#if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
+            ${column.columnName}#if($velocityCount != $allColumns.size()),
+	#end
 #end			
 #end
+
 		)
 		values
 		(
-#foreach($column in $columns)
+#foreach($column in $allColumns)
 #if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
-			#{$column.attrname}#if($velocityCount != $columns.size()), #end
-
+	#if($column.columnName == 'create_by' || $column.columnName == 'update_by')
+            #{${column.attrname}.userId}#if($velocityCount != $allColumns.size()),
+	#end
+	#else
+            #{${column.attrname}}#if($velocityCount != $allColumns.size()),
+	#end
+#end
 #end			
 #end
+
 		)
 	</insert>
 	 
 	<update id="update" parameterType="${package}.entity.${className}Entity">
 		update ${tableName} 
 		<set>
-#foreach($column in $columns)
+#foreach($column in $allColumns)
 #if($column.columnName != $pk.columnName)
-			<if test="$column.attrname != null">$column.columnName = #{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
+	#if($column.columnName != 'create_by' && $column.columnName != 'create_date')
+		#if($column.columnName == 'update_by')
+			<if test="$column.attrname != null">${column.columnName} = #{${column.attrname}.userId}#if($velocityCount != $allColumns.size()), #end</if>
+		#else
+			<if test="$column.attrname != null">${column.columnName} = #{${column.attrname}}#if($velocityCount != $allColumns.size()), #end</if>
+		#end
+	#end
 #end
 #end
 		</set>
