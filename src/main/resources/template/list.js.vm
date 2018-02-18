@@ -16,13 +16,13 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
         limit: 10,
         cols: [[
             {type: "checkbox", fixed: "left", width: 50},
-			#foreach($column in $columns)
-				#if($column.columnName == $pk.columnName)
-                    {field: '${column.attrname}', minWidth: 100, title: '${column.attrname}', sort: true},
-				#else
-                    {field: '${column.attrname}', minWidth: 100, title: '${column.comments}', sort: true},
-				#end
-			#end
+    #foreach($column in $columns)
+        #if($column.columnName == $pk.columnName)
+            {field: '${column.attrname}', minWidth: 100, title: '${column.attrname}', sort: true},
+        #else
+            {field: '${column.attrname}', minWidth: 100, title: '${column.comments}', sort: true},
+        #end
+    #end
             {title: '操作', minWidth: 100, templet: '#tableListBar', fixed: "right", align: "center"}
         ]]
     });
@@ -67,9 +67,9 @@ layui.use(['form', 'layer', 'table', 'laytpl'], function () {
                 var body = layui.layer.getChildFrame('body', index);
 
                 if (edit) {
-					#foreach($column in $columns)
-                        body.find(".${column.attrname}").val(data.${classname}.${column.attrname});
-					#end
+                #foreach($column in $columns)
+                    body.find(".${column.attrname}").val(data.${classname}.${column.attrname});
+                #end
                     layer.close(loadData);
                 }
 

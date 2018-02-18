@@ -41,7 +41,6 @@ public class SysConfigController extends BaseController {
         //查询列表数据
         Query query = new Query(params);
         PageHelper.startPage(query.getPage(), query.getLimit());
-
         List<SysConfigEntity> sysConfigList = sysConfigService.queryList(query);
         PageInfo page = new PageInfo(sysConfigList);
         int total = (int) page.getTotal();

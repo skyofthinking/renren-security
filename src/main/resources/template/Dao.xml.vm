@@ -3,11 +3,11 @@
 
 <mapper namespace="${package}.dao.${className}Dao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="${package}.entity.${className}Entity" id="${classname}Map">
-#foreach($column in $columns)
+    #foreach($column in $columns)
         <result property="${column.attrname}" column="${column.columnName}"/>
-#end
+    #end
     </resultMap>
 
 	<select id="queryObject" resultType="${package}.entity.${className}Entity">
@@ -25,11 +25,11 @@
 			</otherwise>
         </choose>
 	</select>
-	
+
  	<select id="queryTotal" resultType="int">
 		select count(*) from ${tableName} 
 	</select>
-	 
+
 	<insert id="insert" parameterType="${package}.entity.${className}Entity"#if($pk.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$pk.attrname"#end>
 		insert into ${tableName}
 		(
@@ -37,7 +37,7 @@
 	#if($column.columnName != $pk.columnName || $pk.extra != 'auto_increment')
             ${column.columnName}#if($velocityCount != $allColumns.size()),
 	#end
-#end			
+#end
 #end
 
 		)
@@ -52,14 +52,14 @@
             #{${column.attrname}}#if($velocityCount != $allColumns.size()),
 	#end
 #end
-#end			
+#end
 #end
 
 		)
 	</insert>
-	 
+
 	<update id="update" parameterType="${package}.entity.${className}Entity">
-		update ${tableName} 
+		update ${tableName}
 		<set>
 #foreach($column in $allColumns)
 #if($column.columnName != $pk.columnName)
@@ -75,13 +75,13 @@
 		</set>
 		where ${pk.columnName} = #{${pk.attrname}}
 	</update>
-	
+
 	<delete id="delete">
 		delete from ${tableName} where ${pk.columnName} = #{value}
 	</delete>
-	
+
 	<delete id="deleteBatch">
-		delete from ${tableName} where ${pk.columnName} in 
+		delete from ${tableName} where ${pk.columnName} in
 		<foreach item="${pk.attrname}" collection="array" open="(" separator="," close=")">
 			#{${pk.attrname}}
 		</foreach>
